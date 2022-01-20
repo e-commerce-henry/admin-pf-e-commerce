@@ -16,7 +16,7 @@ function valProduct(e){
             img ={e.img}
             brand={e.brand}
             description={e.description}
-            categoryId={e.categoryId}
+            categoryId={e.categoryId} 
             />
         )
     }
