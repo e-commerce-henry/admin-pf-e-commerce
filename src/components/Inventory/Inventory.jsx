@@ -2,13 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { createProduct, getCategorys } from "../../redux/actions";
 import Style from './Inventory.module.css'
+import Products from './Products/Products'
 
 export default function Inventory(){
     const dispatch = useDispatch()
 
-    const categorys = useSelector(state => state.categorys)/* .sort((a, b) => {
-        return a.name.localeCompare(b.name)
-    } ) */
+    const categorys = useSelector(state => state.categorys)
 
     useEffect(() =>{
         dispatch(getCategorys())
@@ -43,6 +42,7 @@ export default function Inventory(){
             category: newProduct.category
         }
         dispatch(createProduct(producto))
+        
         alert(`Category ${newProduct.name} create`)
         setProduct({
             name: '',
@@ -58,8 +58,9 @@ export default function Inventory(){
 
     return(
         <div className={Style.container}>
-            <h1>inventory</h1>
+            
             <form id ="myForm" onSubmit={e => submitProduct(e)}>
+                <h2>Create a product</h2>
 
                 <div>
                     <label type="text">Product name </label>
@@ -93,13 +94,13 @@ export default function Inventory(){
 
                 <div>
                     
-                    <select onChange={e => onChange(e)}>
+                    <select onChange={e => onChange(e)} name="category">
                         <option hidden>Select category:</option>
                         {
                             categorys? categorys.map( cat => {
                                 const {name, id} = cat
                                 return (
-                                    <option value={name} key={id}  >{name}</option>
+                                    <option value={name} key={id}>{`${name}: ${id}`}</option>
                                 )
                             }): null
                         }
@@ -114,6 +115,10 @@ export default function Inventory(){
 
 
             </form>
+            <div className={Style.inventory}>
+                <h1>INVENTORY</h1>
+                <Products/>
+            </div>
         </div>
     )
 };
