@@ -1,10 +1,13 @@
 import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { createCategory } from "../../redux/actions";
-import Style from './Category.module.css'
+import Style from './Category.module.css';
+//import validate from '../validate'; 
 
 export default function Category(){
     const dispatch = useDispatch()
+
+   
 
 /*     useEffect(() =>{
         dispatch(createCategory())
@@ -13,6 +16,9 @@ export default function Category(){
     const [newCategory, setCategory] = useState({
         name: ''
     })
+
+     //creo un estado local para las validaciones. / las validaciones están comentadas hasta que las pueda probar
+     //const [error, setError] = useState({})
 
     function onChange(e){
         setCategory({
@@ -23,13 +29,27 @@ export default function Category(){
 
     function submitCategory(e){
         e.preventDefault();
+        //en caso de que no se ingresen datos // las validaciones están comentadas hasta que las pueda probar. 
+        // setError(validate(error))
+        // if(Object.keys(error).length !== 0){
+        //   alert("Debe llenar todos los campos")
+        // } else{
+
         dispatch(createCategory(newCategory))
 
         alert(`Category ${newCategory.name} create`)
         setCategory({
             name: ''
         })
+
+        // setError(
+        //     validate({
+        //   ...newCategory,
+        //   [e.target.name] : e.target.value,
+        // }))
+
         document.getElementById("myForm").reset();
+    //}
     }
 
     return(
