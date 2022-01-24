@@ -7,7 +7,7 @@ import Inventory from './components/Inventory/Inventory'
 import Orders from './components/Orders/Orders'
 import Favorite from './components/Favorite/Favorite'
 import SalesBanner from './components/SalesBanner/SalesBanner'
-/* import Category from './components/Category/Category'; */
+import Categorys from "./components/Category/Category";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         <Route exact path='/Users' element={<Users />} />
         <Route exact path='/Inventory' element={<Inventory />} />
         <Route exact path='/Orders' element={<Orders />} />
-        {/* <Route exact path='/Category' element={<Category />} /> */}
+        <Route exact path='/Category' element={<Categorys />} />
         <Route exact path='/Favorite' element={<Favorite />} />
         <Route exact path='/SalesBanner' element={<SalesBanner />} />
       </Routes>
