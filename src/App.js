@@ -1,5 +1,5 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Navbar from './components/Navbar/Navbar';
 import Users from './components/Users/Users'
@@ -23,6 +23,7 @@ function App() {
       </Routes>
     </>
   );
+
 }
 
 export default App;
