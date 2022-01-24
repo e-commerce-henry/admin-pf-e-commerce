@@ -7,7 +7,7 @@ import Inventory from './components/Inventory/Inventory'
 import Orders from './components/Orders/Orders'
 import Favorite from './components/Favorite/Favorite'
 import SalesBanner from './components/SalesBanner/SalesBanner'
-import Categorys from "./components/Category/Category";
+import Categorys from "./components/category/Categorys";
 
 function App() {
   return (

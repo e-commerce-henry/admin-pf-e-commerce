@@ -11,7 +11,7 @@ export default function Inventory(){
 
     useEffect(() =>{
         dispatch(getCategorys())
-    },[])
+    },[dispatch])
 
     const [newProduct, setProduct] = useState({
         name: '',
