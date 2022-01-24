@@ -1,15 +1,21 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { createCategory } from "../../redux/actions";
+import { getCategorys } from "../../redux/actions";
 import Style from './Category.module.css';
 //import validate from '../validate'; 
 
 export default function Category(){
     const dispatch = useDispatch()
+    const categorys = useSelector(state => state.categorys)
+
+    useEffect(() =>{
+        dispatch(getCategorys())
+    },[])
 
    
 
-/*     useEffect(() =>{
+    /*     useEffect(() =>{
         dispatch(createCategory())
     },[]) */
 
@@ -67,6 +73,18 @@ export default function Category(){
                 </div>
 
             </form>
+            <div>
+                <h2>List Category</h2>
+                {
+                    categorys.map(category =>{
+                        const {id, name} = category
+                        return(
+                            <div key={id} >{name}</div> 
+                        )
+                         
+                    })
+                }
+            </div>
         </div>
     )
 };

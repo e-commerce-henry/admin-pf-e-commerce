@@ -1,8 +1,9 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Product from "../Product/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../redux/actions";
+import Style from "./Products.module.css"
 
 function valProduct(e){
     if(e.id){
@@ -16,7 +17,7 @@ function valProduct(e){
             img ={e.img}
             brand={e.brand}
             description={e.description}
-            categoryId={e.categoryId} 
+            categoryName={e.category.name} 
             />
         )
     }
@@ -33,11 +34,28 @@ export default function Cards(){
 
     return(
         <>
-        {
-            products.map(e => (
-                valProduct(e)
-            ))
-        }
+            <table className={Style.container}>
+                <tbody>
+                    <tr>
+                        <th>Sku</th>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                    </tr>
+                    <>
+                    {
+                        products.map(e => (
+                            valProduct(e)
+                        ))
+                    }
+                    </>
+                </tbody>
+
+
+            </table>            
         </>
+
     )
 }

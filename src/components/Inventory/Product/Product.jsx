@@ -1,18 +1,19 @@
 import React from "react";
+import Style from "./Product.module.css"
 
-export default function Product({id, name, stock, price, img, brand, description, categoryId}){
+export default function Product({id, name, stock, price, img, brand, description, categoryName}){
     return(
-        <div>
-            <div>Id: {id}</div>
-            <div>Name: {name}</div>
-            <div>Stock: {stock}</div>
-            <div>Price: $ {price}</div>
-            <div>Url img: {img}</div>
-            <div>Brand :{brand}</div>
-            <div>Description: {description}</div>
-            <div>Category ID: {categoryId}</div>
-            <button>Edit</button>
-            <button>Delete</button>
-        </div>
+        <>
+            <tr className={Style.container}>
+                <td>{id}</td>
+                <td>{name}</td>
+                <td>{stock}</td>
+                <td>{price}</td>
+                {/* <div>Url img: {img}</div> */}
+                <td>{brand}</td>
+                {/* <div>Description: {description}</div> */}
+                <td>{categoryName}</td>
+            </tr>
+        </>
     )
 }
