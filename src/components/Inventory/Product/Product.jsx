@@ -13,8 +13,6 @@ export default function Product({id, name, stock, price, img, brand, description
                 <td>{brand}</td>
                 {/* <div>Description: {description}</div> */}
                 <td>{categoryName}</td>
-                <button>Edit</button>
-                <button>Delete</button>
             </tr>
         </>
     )

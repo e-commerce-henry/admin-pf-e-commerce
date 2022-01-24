@@ -33,25 +33,29 @@ export default function Cards(){
     },[])
 
     return(
-        <table className={Style.container}>
+        <>
+            <table className={Style.container}>
+                <tbody>
+                    <tr>
+                        <th>Sku</th>
+                        <th>Name</th>
+                        <th>Stock</th>
+                        <th>Price</th>
+                        <th>Brand</th>
+                        <th>Category</th>
+                    </tr>
+                    <>
+                    {
+                        products.map(e => (
+                            valProduct(e)
+                        ))
+                    }
+                    </>
+                </tbody>
 
-            <tr>
-                <th>Sku</th>
-                <th>Name</th>
-                <th>Stock</th>
-                <th>Price</th>
-                <th>Brand</th>
-                <th>Category</th>
-            </tr>
 
-            <>
-                {
-                    products.map(e => (
-                        valProduct(e)
-                    ))
-                }
-            </>
+            </table>            
+        </>
 
-        </table>
     )
 }
