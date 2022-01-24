@@ -2,7 +2,7 @@ const axios = require('axios')
 
 export function getProducts(){
     return async function(dispatch){
-        const products = await axios('http://localhost:3001/products')
+        const products = await axios('http://proyecto-personal.online/products')
         return(
             dispatch({type: "GET_PRODUCTS", payload: products.data})
         )
@@ -11,13 +11,13 @@ export function getProducts(){
 
 export function createProduct(newProduct){
     return async function(){
-        return await axios.post('http://localhost:3001/products', newProduct)
+        return await axios.post('http://proyecto-personal.online/products', newProduct)
     }
 };
 
 export function getCategorys(){
     return async function (dispatch){
-        const categorys = await axios('http://localhost:3001/category')
+        const categorys = await axios('http://proyecto-personal.online/category')
         return(
             dispatch({type: "GET_CATEGORYS", payload: categorys.data})
         )
@@ -26,7 +26,7 @@ export function getCategorys(){
 
 export function createCategory(newCategory){
     return async function(){
-        return await axios.post('http://localhost:3001/category', newCategory)
+        return await axios.post('http://proyecto-personal.online/category', newCategory)
     }
 };
 

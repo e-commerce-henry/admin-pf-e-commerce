@@ -5,7 +5,7 @@ import Navbar from './components/Navbar/Navbar';
 import Users from './components/Users/Users'
 import Inventory from './components/Inventory/Inventory'
 import Orders from './components/Orders/Orders'
-import Category from './components/category/Category'
+import Category from './components/Category/Category'
 import Favorite from './components/Favorite/Favorite'
 import SalesBanner from './components/SalesBanner/SalesBanner'
 
