@@ -15,7 +15,7 @@ export default function Category(){
 
    
 
-/*     useEffect(() =>{
+    /*     useEffect(() =>{
         dispatch(createCategory())
     },[]) */
 
@@ -60,7 +60,7 @@ export default function Category(){
 
     return(
         <div className={Style.container}>
-            <h1>Category</h1>
+{/*             <h1>Category</h1>
             <form id ="myForm" onSubmit={e => submitCategory(e)}>
 
                 <div>
@@ -84,7 +84,7 @@ export default function Category(){
                          
                     })
                 }
-            </div>
+            </div> */}
         </div>
     )
 };
