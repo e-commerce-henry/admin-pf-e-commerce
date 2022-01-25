@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { createProduct, getCategorys } from "../../redux/actions";
+import { createProduct, getCategorys, getProducts } from "../../redux/actions";
 import Style from './Inventory.module.css'
 import Products from './Products/Products'
 
@@ -8,8 +8,12 @@ export default function Inventory(){
     const dispatch = useDispatch()
 
     const categorys = useSelector(state => state.categorys)
+    const product = useSelector(state => state.products);
+    let brand = product.map(e => e.brand);
+    brand = [...new Set(brand)];
 
     useEffect(() =>{
+        dispatch(getProducts())
         dispatch(getCategorys())
     },[dispatch])
 
@@ -54,6 +58,8 @@ export default function Inventory(){
             category: ''
         })
         document.getElementById("myForm").reset();
+        window.location = '/Inventory'
+
     }
 
     return(
@@ -83,8 +89,18 @@ export default function Inventory(){
                 </div>
 
                 <div>
-                    <label type="text">Brand </label>
-                    <input type='text' name='brand' onChange={e => onChange(e)}/>
+                    <select onChange={e => onChange(e)} name="brand">
+                        <option hidden>Select Brand:</option>
+                        {
+                            brand? brand.map( (b,i) => {
+                                return (
+                                    <option value={b} key={i}>
+                                        {b}
+                                    </option>
+                                )
+                            }): null
+                        }
+                    </select>
                 </div>
 
                 <div>

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import Product from "../Product/Product";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../../redux/actions";
 import Style from "./Products.module.css"
+import Pagination from "../../Pagination/Pagination";
 
 function valProduct(e){
     if(e.id){
@@ -23,10 +24,22 @@ function valProduct(e){
     }
 }
 
+
 export default function Cards(){
     const dispatch = useDispatch()
     const products = useSelector(state => state.products)
     
+    const numberPage =[];
+    const [page, setPage] = useState(1);
+    const productXpage =25;
+    let paginas = Math.ceil(products.length/productXpage);
+        for (let i = 1; i <= paginas; i++) {
+            numberPage.push(i);
+        }
+        const indexUltimo = page*productXpage;
+        const indexInicio = indexUltimo - productXpage;
+        const slicevideogame = products.slice(indexInicio, indexUltimo);
+
 
     useEffect(() =>{
         dispatch(getProducts())
@@ -46,15 +59,19 @@ export default function Cards(){
                     </tr>
                     <>
                     {
-                        products.map(e => (
+                        slicevideogame.map(e => (
                             valProduct(e)
                         ))
                     }
                     </>
+                    
                 </tbody>
-
-
-            </table>            
+            </table>   
+            <Pagination
+                numberPage={numberPage}
+                page={page}
+                setPage={setPage}
+            />         
         </>
 
     )
