@@ -1,48 +1,50 @@
-.container{
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    color: white;
-    margin: 3%;
+.container {
+	display: flex;
+	gap: 2rem;
+	color: white;
+	margin: 3%;
+	justify-content: space-around;
 }
-.container form{
-    grid-area: 1 / 1 / 4 / 3;
-    display: flex;
-    flex-direction: column;
-    font-size: larger;
-    
+.container form {
+	display: flex;
+	flex-direction: column;
+	font-size: larger;
+	width: 20%;
 }
-.container form div{
-    margin-top: 15px;
+.container form div {
+	margin-top: 15px;
+	display: flex;
+	flex-direction: column;
 }
 
-.container form div input{
-    display: flex;
-    justify-content: flex-end;
+.container form div input {
+	display: flex;
+	justify-content: flex-end;
 }
 
 h1 {
-    text-align: center;
-    grid-area: 1 / 2 / 2 / 3;
+	text-align: center;
+	grid-area: 1 / 2 / 2 / 3;
 }
 
-.container div{
-    grid-area: 1 / 2 / 6 / 6;
+.container div {
+	grid-area: 1 / 2 / 6 / 6;
 }
 
-button{
-    border-radius: 15px;
+button {
+	border-radius: 15px;
 }
 
-button:hover{
-    background-color: #FF5722;
-    font-weight: bold;
-    border: none;
+button:hover {
+	background-color: #ff5722;
+	font-weight: bold;
+	border: none;
 }
 
-.inventory{
-    background-color: aliceblue;
-    color: black;
+.inventory {
+	background-color: aliceblue;
+	color: black;
+	width: 60%;
+	display: flex;
+	flex-direction: column;
 }
