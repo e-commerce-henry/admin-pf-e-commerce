@@ -5,7 +5,7 @@ const inicialState = {
 	categorys: [],
 	saleBanner: [],
 	authUser: [],
-  	updateproducts:[]
+	updateproducts: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -19,7 +19,9 @@ const reducer = (state = inicialState, action) => {
 			return {
 				...state,
 				products: action.payload.sort((a, b) => {
-					return a.id - b.id;
+
+					return b.id - a.id;
+
 				}),
 			};
 		case "GET_SALEBANNER":
@@ -43,11 +45,11 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				authUser: action.payload
 			}
-    	case "UPDATE_PRODUCT":
-             return{
-                 ...state,
-                 updateproducts: action.payload
-             }
+		case "UPDATE_PRODUCT":
+			return {
+				...state,
+				updateproducts: action.payload,
+			};
 		default:
 			return state;
 	}

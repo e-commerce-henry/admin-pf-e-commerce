@@ -10,7 +10,6 @@ import SalesBanner from "./components/SalesBanner/SalesBanner";
 import Categorys from "./components/category/Categorys";
 import Auth from "./components/Auth/Auth";
 
-
 function App() {
 	return (
 		<>
