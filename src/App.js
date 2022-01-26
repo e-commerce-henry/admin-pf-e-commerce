@@ -7,13 +7,19 @@ import Inventory from "./components/Inventory/Inventory";
 import Orders from "./components/Orders/Orders";
 import Favorite from "./components/Favorite/Favorite";
 import SalesBanner from "./components/SalesBanner/SalesBanner";
-import Categorys from "./components/Category/Categorys";
+
+import Categorys from "./components/category/Categorys";
+import Auth from "./components/Auth/Auth";
+
+
 
 function App() {
 	return (
 		<>
 			<Navbar />
 			<Routes>
+
+				<Route exact path="/" element={<Auth />} />
 				<Route exact path="/Users" element={<Users />} />
 				<Route exact path="/Inventory" element={<Inventory />} />
 				<Route exact path="/Orders" element={<Orders />} />

@@ -20,18 +20,18 @@ export function getCategorys() {
 	};
 }
 
-export function editProduct(id,value){
-    return dispatch => {
-        axios.put(`http://localhost:3001/products/${id}`,value)
-        .then((result) => {
-            return dispatch({
-                type:"UPDATE_PRODUCT",
-                payload:result.data
-            })
-        }).catch((err) => {
-            console.error(err)
-        });
-    }
+export function editProduct(id, value) {
+	return dispatch => {
+		axios.put(`http://localhost:3001/products/${id}`, value)
+			.then((result) => {
+				return dispatch({
+					type: "UPDATE_PRODUCT",
+					payload: result.data
+				})
+			}).catch((err) => {
+				console.error(err)
+			});
+	}
 }
 
 
@@ -59,6 +59,7 @@ export function postSaleBanner(saleItem) {
 	};
 }
 
+
 export function deleteSaleBanner(saleItemId) {
 	return async function (dispatch) {
 		const removedItem = await axios.delete(
@@ -67,3 +68,15 @@ export function deleteSaleBanner(saleItemId) {
 		return dispatch({ type: "DELETE_SALEBANNER", payload: saleItemId });
 	};
 }
+
+
+export function authUser({email, pwd}) {
+	return async function (dispatch) {
+		let respuesta = await axios.post('http://localhost:3001/auth/signIn', {email, pwd}, { withCredentials: true })
+		console.log('llegue aqui')
+		return (
+			dispatch({ type: "AUTH_USER", payload: respuesta })
+		)
+	}
+}
+

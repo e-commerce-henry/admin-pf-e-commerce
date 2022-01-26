@@ -63,10 +63,10 @@ export default function Product({id, name, stock, price, img, brand, description
         setModal(!modal)
     }
 
-    useEffect(() => {
+/*     useEffect(() => {
       
         dispatch(getCategorys())
-    }, [dispatch]);
+    }, [dispatch]); */
     
 
     return(
