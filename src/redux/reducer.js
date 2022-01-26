@@ -1,10 +1,11 @@
-import {} from './actions';
+import {} from "./actions";
 
 const inicialState = {
 	products: [],
 	categorys: [],
 	saleBanner: [],
-	authUser: []
+	authUser: [],
+  	updateproducts:[]
 };
 
 const reducer = (state = inicialState, action) => {
@@ -42,6 +43,11 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				authUser: action.payload
 			}
+    	case "UPDATE_PRODUCT":
+             return{
+                 ...state,
+                 updateproducts: action.payload
+             }
 		default:
 			return state;
 	}
