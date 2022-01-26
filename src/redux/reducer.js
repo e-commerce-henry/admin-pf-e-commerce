@@ -1,9 +1,11 @@
 import {} from "./actions";
 
 const inicialState = {
+
 	products: [],
 	categorys: [],
 	saleBanner: [],
+  updateproducts:[]
 };
 
 const reducer = (state = inicialState, action) => {
@@ -36,8 +38,14 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				saleBanner: state.saleBanner.filter((e) => e.id != action.payload),
 			};
+    case "UPDATE_PRODUCT":
+             return{
+                 ...state,
+                 updateproducts: action.payload
+             }
 		default:
 			return state;
 	}
 };
 export default reducer;
+
