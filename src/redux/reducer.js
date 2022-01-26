@@ -1,11 +1,10 @@
 import {} from "./actions";
 
 const inicialState = {
-
 	products: [],
 	categorys: [],
 	saleBanner: [],
-  updateproducts:[]
+	updateproducts: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -19,7 +18,7 @@ const reducer = (state = inicialState, action) => {
 			return {
 				...state,
 				products: action.payload.sort((a, b) => {
-					return a.id - b.id;
+					return b.id - a.id;
 				}),
 			};
 		case "GET_SALEBANNER":
@@ -38,14 +37,13 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				saleBanner: state.saleBanner.filter((e) => e.id != action.payload),
 			};
-    case "UPDATE_PRODUCT":
-             return{
-                 ...state,
-                 updateproducts: action.payload
-             }
+		case "UPDATE_PRODUCT":
+			return {
+				...state,
+				updateproducts: action.payload,
+			};
 		default:
 			return state;
 	}
 };
 export default reducer;
-
