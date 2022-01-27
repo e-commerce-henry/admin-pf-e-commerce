@@ -69,21 +69,19 @@ export function deleteSaleBanner(saleItemId) {
 export function getUsers() {
 	return async function (dispatch) {
 		const users = (await axios.get("http://localhost:3001/users")).data;
-		console.log(users);
 		return dispatch({ type: "GET_ALLUSERS", payload: users });
 	};
 }
 
-export function getUserById(id) {
+export function editUser(userToEdit) {
 	return async function (dispatch) {
-		try {
-			const foundUser = (await axios.get(`http://localhost:3001/users/${id}`))
-				.data;
-			console.log(foundUser);
-			return dispatch({ type: "GET_USERBYID", payload: foundUser });
-		} catch (error) {
-			return error;
-		}
+		const edited = (
+			await axios.put(
+				`http://localhost:3001/users/${userToEdit.id}`,
+				userToEdit
+			)
+		).data;
+		return dispatch({ type: "EDIT_USER", payload: userToEdit });
 	};
 }
 
@@ -95,6 +93,17 @@ export function addUser(newUser) {
 			).data;
 			console.log(addedUser);
 			return dispatch({ type: "ADD_USER", payload: addedUser });
+		} catch (err) {
+			return err;
+		}
+	};
+}
+
+export function deleteUser(id) {
+	return async function (dispatch) {
+		try {
+			const user = await axios.delete(`http://localhost:3001/users/${id}`);
+			return dispatch({ type: "DELETE_USER", payload: id });
 		} catch (err) {
 			return err;
 		}

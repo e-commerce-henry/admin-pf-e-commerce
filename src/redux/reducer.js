@@ -7,7 +7,6 @@ const inicialState = {
 	authUser: [],
 	updateproducts: [],
 	users: [],
-	userById: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -68,10 +67,23 @@ const reducer = (state = inicialState, action) => {
 				users: [...state.users, newUser],
 			};
 
-		case "GET_USERBYID":
+		case "EDIT_USER":
+			const result = [
+				...state.users.filter((e) => e.id != action.payload.id),
+				action.payload,
+			];
+			console.log(action.payload);
+			console.log(state.users);
 			return {
 				...state,
-				userById: action.payload,
+				users: result.sort((a, b) => {
+					return a.id - b.id;
+				}),
+			};
+		case "DELETE_USER":
+			return {
+				...state,
+				users: state.users.filter((e) => e.id != action.payload),
 			};
 		default:
 			return state;

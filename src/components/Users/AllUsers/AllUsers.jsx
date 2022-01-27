@@ -1,11 +1,10 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, getUserById } from "../../../redux/actions";
+import { getUsers, editUser, deleteUser } from "../../../redux/actions";
 import Style from "./AllUsers.module.css"
-import { Modal, TextField, Select, MenuItem, TextareaAutosize } from '@material-ui/core';
+import { Modal, TextField} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from "react";
-import axios from 'axios';
 
 //Material-ui styles
 const useStyles = makeStyles((theme)=>({
@@ -36,21 +35,8 @@ const AllUsers = () =>{
     const styles = useStyles();
     const users = useSelector(state => state.users);
     const [showModal, setShowModal]= useState(false)
-    // const foundUserById = useSelector(state => state.userById);
-    // const { id, name, surname, email, role} = foundUserById;
-    // const { address, city, province, postalCode, floor} = foundUserById.clientAddresses[0];
-
-    const [userToEdit, setUserToEdit] = useState({
-        name: '',
-        // surname:,
-        // email,
-        // address: 
-        // postalCode: foundUserById.clientAddresses[0].postalCode
-        // city:foundUserById[0].address,
-        // province:foundUserById[0].address,
-        // floor:foundUserById[0].address,
-        // role:foundUserById[0].address
-    })
+    
+    const [userToEdit, setUserToEdit] = useState({})
 
     useEffect(()=>{
         dispatch(getUsers())
@@ -59,13 +45,22 @@ const AllUsers = () =>{
     let foundById = null
     const onClick = (e)=>{
         setShowModal(!showModal)
-        console.log(e.target.value)
         foundById = users.filter(elem=>{return elem.id == e.target.value})
-        console.log(foundById);
-    }
-
-    const editUserHandler = (e)=>{
-        console.log(e)
+        const { id, name, surname, email, role  } = foundById[0];
+        const { address, postalCode, city, province, floor} = foundById[0].clientAddresses[0];
+        setUserToEdit({
+            id,
+            name,
+            surname,
+            email,
+            role,
+            address,
+            postalCode,
+            city,
+            province,
+            addressId : foundById[0].clientAddresses[0].id,
+            floor: floor || ''
+        })
     }
 
     const onChangeHandler = (e) =>{
@@ -75,8 +70,14 @@ const AllUsers = () =>{
         })
     }
 
-    const deleteUserHandler = () =>{
-        console.log()
+    const editUserHandler = (e)=>{
+        e.preventDefault();
+        dispatch(editUser(userToEdit))
+        setShowModal(!showModal)
+    }
+
+    const deleteUserHandler = (e) =>{
+        dispatch(deleteUser(e.target.value))
     }
     return(
         <>
@@ -109,10 +110,10 @@ const AllUsers = () =>{
         </table>
 
         {
-            foundById 
+            userToEdit 
                 ? <Modal
                 open={showModal}
-                onClose={onClick}
+                onClose={()=>{setShowModal(!showModal)}}
                 >
                     <form className={styles.modal} onSubmit={editUserHandler} >
                         <div align='center' >
@@ -122,7 +123,7 @@ const AllUsers = () =>{
                             label='N° Id:'
                             name='id'
                             className={styles.textfield}
-                            value={foundById.id}
+                            value={userToEdit.id}
                             // onChange={handleOnChange}
                             disabled
                         />
@@ -131,10 +132,10 @@ const AllUsers = () =>{
                             label='Name: '
                             name='name'
                             className={styles.textfield}
-                            value={foundById.name}
+                            value={userToEdit.name}
                             onChange={onChangeHandler}
                         />
-                        {/* <br/>
+                        <br/>
                         <TextField
                             label='Surname:'
                             name='surname'
@@ -148,7 +149,7 @@ const AllUsers = () =>{
                             name='email'
                             className={styles.textfield}
                             value={userToEdit.email}
-                            onChange={onChangeHandler}img
+                            onChange={onChangeHandler}
                         />
                         <br/>
                         <TextField
@@ -198,11 +199,11 @@ const AllUsers = () =>{
                             value={userToEdit.floor}
                             onChange={onChangeHandler}
                         />
-                         */}
+                        
                         <div align='rigth' >
-                            <button type="submit" >Actualizar</button>
-                            {/* <button value={foundUserById.id} onClick={deleteUserHandler}></button> */}
-                            <button onClick={onClick} >cancelar</button>
+                            <button type="submit" >Update</button>
+                            <button value={userToEdit.id} onClick={deleteUserHandler}>Delete User</button>
+                            <button onClick={()=>setShowModal(!showModal)} >Cancel</button>
                         </div>
                     </form>
                 </Modal>
