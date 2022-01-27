@@ -17,9 +17,7 @@ const reducer = (state = inicialState, action) => {
 		case "GET_PRODUCTS":
 			return {
 				...state,
-				products: action.payload.sort((a, b) => {
-					return b.id - a.id;
-				}),
+				products: action.payload
 			};
 		case "GET_SALEBANNER":
 			return {
@@ -35,7 +33,7 @@ const reducer = (state = inicialState, action) => {
 			console.log(action.payload);
 			return {
 				...state,
-				saleBanner: state.saleBanner.filter((e) => e.id != action.payload),
+				saleBanner: state.saleBanner.filter((e) => e.id !== action.payload),
 			};
 		case "UPDATE_PRODUCT":
 			return {
