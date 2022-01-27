@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
-import { getProducts, getSaleBanner, postSaleBanner } from "../../redux/actions";
+import { getProducts, postSaleBanner } from "../../redux/actions";
 import BannerItems from "./BannerProducts/BannerProducts";
 import Style from './SalesBanner.module.css'
 

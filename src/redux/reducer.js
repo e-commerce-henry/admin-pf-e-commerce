@@ -4,11 +4,10 @@ const inicialState = {
 	products: [],
 	categorys: [],
 	saleBanner: [],
-
 	authUser: [],
-
 	updateproducts: [],
-
+	users: [],
+	userById: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -22,9 +21,7 @@ const reducer = (state = inicialState, action) => {
 			return {
 				...state,
 				products: action.payload.sort((a, b) => {
-
 					return b.id - a.id;
-
 				}),
 			};
 		case "GET_SALEBANNER":
@@ -45,10 +42,10 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "AUTH_USER":
-			return{
+			return {
 				...state,
-				authUser: action.payload
-			}
+				authUser: action.payload,
+			};
 
 		case "UPDATE_PRODUCT":
 			return {
@@ -56,6 +53,26 @@ const reducer = (state = inicialState, action) => {
 				updateproducts: action.payload,
 			};
 
+		case "GET_ALLUSERS":
+			return {
+				...state,
+				users: action.payload.sort((a, b) => {
+					return a.id - b.id;
+				}),
+			};
+
+		case "ADD_USER":
+			const { newUser } = action.payload;
+			return {
+				...state,
+				users: [...state.users, newUser],
+			};
+
+		case "GET_USERBYID":
+			return {
+				...state,
+				userById: action.payload,
+			};
 		default:
 			return state;
 	}
