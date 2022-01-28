@@ -7,6 +7,7 @@ export const AuthProvider = ({ children }) => {
 	const [auth, setAuth] = useState({
 		token: Cookies.get("jwt-Logged"),
 	});
+
 	console.log(auth);
 	return (
 		<AuthContext.Provider value={{ auth, setAuth }}>

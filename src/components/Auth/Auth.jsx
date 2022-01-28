@@ -13,7 +13,7 @@ export default function Auth(){
     const {setAuth, auth} = useAuth()
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location.state?.from?.pathname || '/'
+    const from = location.state?.from?.pathname || '/home'
     const [user, setUser] = useState({
         email: '',
         pwd: ''

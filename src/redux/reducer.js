@@ -85,6 +85,12 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				users: state.users.filter((e) => e.id != action.payload),
 			};
+
+		case "LOG_OUT":
+			return {
+				...state,
+				authUser: [],
+			};
 		default:
 			return state;
 	}
