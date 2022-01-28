@@ -1,12 +1,13 @@
 import Style from './Navbar.module.css'
-import {useNavigate} from 'react-router-dom'
+import {Outlet, useNavigate} from 'react-router-dom'
 export default function Navbar(){
     const navigate = useNavigate();
     function HandleClick(e){
-        navigate(`/${e.target.value}`);
+        navigate(`/home/${e.target.value}`);
     };
 
     return(
+        <>
         <div className={Style.container}>
             <h1>ADMIN E- COMMERCE</h1>
             <div>
@@ -17,5 +18,8 @@ export default function Navbar(){
                 <button type='button' value='SalesBanner' onClick={(e) =>HandleClick(e)}>Sales Banner</button>
             </div>
         </div>
+        <Outlet/>
+        </>
+        
     )
 }
