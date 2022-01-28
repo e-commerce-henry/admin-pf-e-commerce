@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { addUser } from '../../redux/actions';
 
 export default function UsersPanel(){
+    console.log('entra')
     const dispatch = useDispatch();
     const [newUser, setNewUser] = useState({
         name: '',

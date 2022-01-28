@@ -1,14 +1,24 @@
 import React from "react"
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Grid, Paper, TextField, Button} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import Cookies from 'js-cookie';
+import { useState } from "react";
+import { useDispatch} from "react-redux";
+import { useNavigate, useLocation } from "react-router-dom";
 import { authUser } from "../../redux/actions"; 
+import useAuth from '../../hooks/useAuth';
 
 export default function Auth(){
     const dispatch = useDispatch()
+    const {setAuth, auth} = useAuth()
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/home'
     const [user, setUser] = useState({
         email: '',
         pwd: ''
     })
+    const [errorMsg, setErrorMsg] = useState('')
 
     function onChange(e){
         setUser({
@@ -17,32 +27,60 @@ export default function Auth(){
         })
     }
 
-    function submitUser(e){
+    async function submitUser (e){
         e.preventDefault();
-        dispatch(authUser(user))
-        
+        try{
+            const response = await dispatch(authUser(user))
+            console.log(response)
+           
+        if(response){
+            const token = Cookies.get('jwt-Logged');
+            setAuth({token: token});
+            navigate(from, {replace: true});
+        }
+        } catch(err){
+            console.log(err)
+            setErrorMsg(err)
+        }
         setUser({
             email: '',
             pwd: ''
         })
-        document.getElementById("myForm").reset();
     }
 
     return(
         <>
-        <form id ="myForm" onSubmit={e => submitUser(e)}>
-            <div>
-                <label>Correo </label>
-                <input type="text" name="email" onChange={e=> onChange(e)}/>
-            </div>
-            <div>
-                <label>Contraseña </label>
-                <input type="text" name="pwd" onChange={e=> onChange(e)}/>
-            </div>
-            <div>
-                <button type='submit'>Enviar</button>
-            </div>
-        </form>
+        <div style={{padding: 60}}>
+            <Paper elevation={3}>
+                <form id ="myForm" onSubmit={e => submitUser(e)}>
+                    <Grid
+                        container
+                        spacing={3}
+                        direction={'column'}
+                        justifyContent={'center'}
+                        alignItems={'center'}
+                    >
+                        <Grid item xs={6}>
+                            <TextField label = 'Email' name='email' value={user.email} onChange={onChange}></TextField>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField label= 'Password' name='pwd' value={user.pwd} type={'password'} onChange={onChange}></TextField>
+                        </Grid>
+                    
+
+                        {errorMsg
+                            ?   <Alert severity="error">
+                                Wrong Email address or password - <strong>Check it out!</strong>
+                                </Alert>
+                            : null
+                        }
+                        <Grid item xs={12}>
+                            <Button fullWidth type='submit'>Login</Button>
+                        </Grid>
+                    </Grid>
+                </form>
+            </Paper>
+        </div>
         </>
     )
 }
