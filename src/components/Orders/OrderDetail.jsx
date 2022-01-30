@@ -1,4 +1,4 @@
-import { Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core"
+import { Card, CardContent, Typography, Modal, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@material-ui/core"
 import axios from "axios";
 import { useEffect } from "react";
 import { useSelector } from "react-redux"
@@ -6,11 +6,13 @@ import { useSelector } from "react-redux"
 
 const OrderDetail = ({showDialog, setShowDialog})=>{
     const orderById = useSelector(state=> state.orderById);
+    let userDetails;
 
     useEffect(async ()=>{ //traigo los detalles de usuario para mostrar los detalles de este en el modal debajo de la tabla
-        const userDetails = (await axios.get(`http://localhost:3001/users/${orderById.userId}`)).data;
-        
+        userDetails = (await axios.get(`http://localhost:3001/users/${orderById.userId}`)).data;
+        const shippingAddress = userDetails.clientAddresses.find((elem)=> elem.id == orderById.shippingAddress)
         console.log(userDetails)
+        console.log(shippingAddress);
     }, [orderById])
     return(
         
@@ -40,7 +42,11 @@ const OrderDetail = ({showDialog, setShowDialog})=>{
                         }
                     </TableBody>
                 </Table>
-            </TableContainer>        
+            </TableContainer>
+
+                  
+            
+
         </Modal> 
                 
         

@@ -93,7 +93,6 @@ export function addUser(newUser) {
 			const addedUser = (
 				await axios.post("http://localhost:3001/users", newUser)
 			).data;
-			console.log(addedUser);
 			return dispatch({ type: "ADD_USER", payload: addedUser });
 		} catch (err) {
 			return err;
@@ -118,7 +117,6 @@ export function authUser({ email, pwd }) {
 			email,
 			pwd,
 		});
-		console.log("llegue aqui");
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};
 }
@@ -126,7 +124,6 @@ export function authUser({ email, pwd }) {
 export function getAllOrders() {
 	return async function (dispatch) {
 		const orders = (await axios.get("http://localhost:3001/orders")).data;
-		console.log(orders);
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }
