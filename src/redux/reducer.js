@@ -7,6 +7,8 @@ const inicialState = {
 	authUser: [],
 	updateproducts: [],
 	users: [],
+	orders: [],
+	orderById: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -84,6 +86,17 @@ const reducer = (state = inicialState, action) => {
 			return {
 				...state,
 				users: state.users.filter((e) => e.id != action.payload),
+			};
+
+		case "GET_ALL_ORDERS":
+			return {
+				...state,
+				orders: action.payload,
+			};
+		case "GET_ORDER_BY_ORDERID":
+			return {
+				...state,
+				orderById: state.orders.find((elem) => elem.id == action.payload),
 			};
 
 		case "LOG_OUT":

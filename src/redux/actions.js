@@ -123,10 +123,20 @@ export function authUser({ email, pwd }) {
 	};
 }
 
+export function getAllOrders() {
+	return async function (dispatch) {
+		const orders = (await axios.get("http://localhost:3001/orders")).data;
+		console.log(orders);
+		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
+	};
+}
+export function getOrderByOrderId(orderId) {
+	return { type: "GET_ORDER_BY_ORDERID", payload: orderId };
+}
+
 export function logOut() {
 	return async function (dispatch) {
 		let response = (await axios.get("http://localhost:3001/auth/logOut")).data;
-		console.log(response);
 		return dispatch({ type: "LOG_OUT", payload: response });
 	};
 }
