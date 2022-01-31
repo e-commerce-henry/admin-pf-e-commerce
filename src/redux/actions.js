@@ -9,7 +9,10 @@ export function getProducts() {
 
 export function createProduct(newProduct) {
 	return async function () {
-		return await axios.post("http://proyecto-personal.online/products", newProduct);
+		return await axios.post(
+			"http://proyecto-personal.online/products",
+			newProduct
+		);
 	};
 }
 
@@ -38,13 +41,18 @@ export function editProduct(id, value) {
 
 export function createCategory(newCategory) {
 	return async function () {
-		return await axios.post("http://proyecto-personal.online/category", newCategory);
+		return await axios.post(
+			"http://proyecto-personal.online/category",
+			newCategory
+		);
 	};
 }
 
 export function getSaleBanner() {
 	return async function (dispatch) {
-		const saleBanner = await axios.get("http://proyecto-personal.online/saleBanner");
+		const saleBanner = await axios.get(
+			"http://proyecto-personal.online/saleBanner"
+		);
 		return dispatch({ type: "GET_SALEBANNER", payload: saleBanner.data });
 	};
 }
@@ -61,14 +69,17 @@ export function postSaleBanner(saleItem) {
 
 export function deleteSaleBanner(saleItemId) {
 	return async function (dispatch) {
-		await axios.delete(`http://proyecto-personal.online/saleBanner/${saleItemId}`);
+		await axios.delete(
+			`http://proyecto-personal.online/saleBanner/${saleItemId}`
+		);
 		return dispatch({ type: "DELETE_SALEBANNER", payload: saleItemId });
 	};
 }
 
 export function getUsers() {
 	return async function (dispatch) {
-		const users = (await axios.get("http://proyecto-personal.online/users")).data;
+		const users = (await axios.get("http://proyecto-personal.online/users"))
+			.data;
 		return dispatch({ type: "GET_ALLUSERS", payload: users });
 	};
 }
@@ -101,7 +112,9 @@ export function addUser(newUser) {
 export function deleteUser(id) {
 	return async function (dispatch) {
 		try {
-			const user = await axios.delete(`http://proyecto-personal.online/users/${id}`);
+			const user = await axios.delete(
+				`http://proyecto-personal.online/users/${id}`
+			);
 			return dispatch({ type: "DELETE_USER", payload: id });
 		} catch (err) {
 			return err;
@@ -111,14 +124,13 @@ export function deleteUser(id) {
 
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
-
 		let respuesta = await axios.post(
 			"http://localhost:3001/auth/signIn",
 			{
 				email,
 				pwd,
 			},
-			{ withCredentials: true }
+			{ withCredentials: true, mode: "cors", credentials: "include" }
 		);
 
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
@@ -127,7 +139,8 @@ export function authUser({ email, pwd }) {
 
 export function getAllOrders() {
 	return async function (dispatch) {
-		const orders = (await axios.get("https://proyecto-personal.online/orders")).data;
+		const orders = (await axios.get("https://proyecto-personal.online/orders"))
+			.data;
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }
@@ -137,7 +150,9 @@ export function getOrderByOrderId(orderId) {
 
 export function logOut() {
 	return async function (dispatch) {
-		let response = (await axios.get("https://proyecto-personal.online/auth/logOut")).data;
+		let response = (
+			await axios.get("https://proyecto-personal.online/auth/logOut")
+		).data;
 		return dispatch({ type: "LOG_OUT", payload: response });
 	};
 }
