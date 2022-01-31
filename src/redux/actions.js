@@ -1,7 +1,5 @@
 const axios = require("axios");
 
-axios.defaults.withCredentials = true;
-
 export function getProducts() {
 	return async function (dispatch) {
 		const products = await axios("http://localhost:3001/products");
@@ -113,10 +111,14 @@ export function deleteUser(id) {
 
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
-		let respuesta = await axios.post("http://localhost:3001/auth/signIn", {
-			email,
-			pwd,
-		});
+		let respuesta = await axios.post(
+			"http://localhost:3001/auth/signIn",
+			{
+				email,
+				pwd,
+			},
+			{ withCredentials: true }
+		);
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};
 }
