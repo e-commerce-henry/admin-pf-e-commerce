@@ -113,7 +113,7 @@ export function deleteUser(id) {
 
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
-		let respuesta = await axios.post("http://proyecto-personal.online/auth/signIn", {
+		let respuesta = await axios.post("https://proyecto-personal.online/auth/signIn", {
 			email,
 			pwd,
 		});
@@ -123,7 +123,7 @@ export function authUser({ email, pwd }) {
 
 export function getAllOrders() {
 	return async function (dispatch) {
-		const orders = (await axios.get("http://proyecto-personal.online/orders")).data;
+		const orders = (await axios.get("https://proyecto-personal.online/orders")).data;
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }
@@ -133,7 +133,7 @@ export function getOrderByOrderId(orderId) {
 
 export function logOut() {
 	return async function (dispatch) {
-		let response = (await axios.get("http://proyecto-personal.online/auth/logOut")).data;
+		let response = (await axios.get("https://proyecto-personal.online/auth/logOut")).data;
 		return dispatch({ type: "LOG_OUT", payload: response });
 	};
 }
