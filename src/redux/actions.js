@@ -113,7 +113,7 @@ export function authUser({ email, pwd }) {
 	return async function (dispatch) {
 
 		let respuesta = await axios.post(
-			"http://localhost:3001/auth/signIn",
+			"http://proyecto-personal.online/auth/signIn",
 			{
 				email,
 				pwd,
