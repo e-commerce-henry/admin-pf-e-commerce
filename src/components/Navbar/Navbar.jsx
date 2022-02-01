@@ -17,7 +17,7 @@ export default function Navbar(){
     const logOutHandler = ()=>{
         dispatch(logOut());
         setAuth({token: undefined})
-        localStorage.removeItem('userAuth');
+        sessionStorage.removeItem('userAuth');
         navigate('/')
     }
 

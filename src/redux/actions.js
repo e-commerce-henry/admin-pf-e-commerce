@@ -133,7 +133,7 @@ export function authUser({ email, pwd }) {
 			})
 		).data;
 		console.log(respuesta);
-		localStorage.setItem("userAuth", JSON.stringify(respuesta));
+		sessionStorage.setItem("userAuth", JSON.stringify(respuesta));
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};
 }
