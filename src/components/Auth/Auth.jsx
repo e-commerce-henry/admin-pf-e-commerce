@@ -38,6 +38,8 @@ export default function Auth(){
         if(userCredential){
             // const token = sessionStorage.getItem('userAuth');
             // setAuth({token: token});
+            
+            
             navigate(from, {replace: true});
         }
         } catch(err){
