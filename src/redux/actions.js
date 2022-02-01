@@ -51,14 +51,15 @@ export function getSaleBanner() {
 	};
 }
 
-export function postSaleBanner(saleItem) {
+export function postSaleBanner(saleItem, token) {
+	console.log(token);
 	return async function (dispatch) {
 		const newSaleItem = await axios.post(
 			"http://localhost:3001/saleBanner",
 			saleItem,
 			{
 				headers: {
-					Authorization: `Bearer ${sessionStorage.getItem("userAuth")}`,
+					authorization: `Bearer ${token}`,
 				},
 			}
 		);

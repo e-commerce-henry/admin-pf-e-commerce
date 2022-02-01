@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import useAuth from "../../hooks/useAuth";
 import { getProducts, postSaleBanner } from "../../redux/actions";
 import BannerItems from "./BannerProducts/BannerProducts";
 import Style from './SalesBanner.module.css'
 
 export default function SalesBanner(){
     const dispatch = useDispatch();
+    const {token} = useAuth()
     const products = useSelector(state => state.products);
     const [newSaleItem, setNewSaleItem] = useState({
         productId: '',
@@ -31,7 +33,7 @@ export default function SalesBanner(){
             productId: newSaleItem.productId,
             discount: newSaleItem.discount,
         }
-        dispatch(postSaleBanner(saleItem));
+        dispatch(postSaleBanner(saleItem, token));
         setNewSaleItem({
             discount: '',
             productId: '',
