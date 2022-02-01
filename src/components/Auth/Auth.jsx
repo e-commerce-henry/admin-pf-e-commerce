@@ -6,10 +6,11 @@ import { useDispatch} from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
 import { authUser } from "../../redux/actions"; 
 import useAuth from '../../hooks/useAuth';
+import {getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Auth(){
     const dispatch = useDispatch()
-    const {setAuth, auth} = useAuth()
+    const {signIn } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/home'
@@ -29,11 +30,14 @@ export default function Auth(){
     async function submitUser (e){
         e.preventDefault();
         try{
-            const response = await dispatch(authUser(user))
+            const userCredential = await signIn(user.email, user.pwd);
+            console.log(userCredential);
+            setErrorMsg('')
+            // const response = await dispatch(authUser(user))
            
-        if(response){
-            const token = sessionStorage.getItem('userAuth');
-            setAuth({token: token});
+        if(userCredential){
+            // const token = sessionStorage.getItem('userAuth');
+            // setAuth({token: token});
             navigate(from, {replace: true});
         }
         } catch(err){
@@ -50,7 +54,7 @@ export default function Auth(){
         <>
         <div style={{padding: 60}}>
             <Paper elevation={3}>
-                <form id ="myForm" onSubmit={e => submitUser(e)}>
+                <form id ="myForm" onSubmit={submitUser}>
                     <Grid
                         container
                         spacing={3}
@@ -59,16 +63,16 @@ export default function Auth(){
                         alignItems={'center'}
                     >
                         <Grid item xs={6}>
-                            <TextField label = 'Email' name='email' value={user.email} onChange={onChange}></TextField>
+                            <TextField label = 'Email' name='email' value={user.email} onChange={onChange} required></TextField>
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField label= 'Password' name='pwd' value={user.pwd} type={'password'} onChange={onChange}></TextField>
+                            <TextField label= 'Password' name='pwd' value={user.pwd} type={'password'} required onChange={onChange}></TextField>
                         </Grid>
                     
 
                         {errorMsg
                             ?   <Alert severity="error">
-                                Wrong Email address or password - <strong>Check it out!</strong>
+                                 {errorMsg.code} - <strong>Check it out!</strong>
                                 </Alert>
                             : null
                         }

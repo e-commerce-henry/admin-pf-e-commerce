@@ -16,7 +16,7 @@ function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<PublicRoute />}>
+				<Route element={<PublicRoute />}>
 					<Route path="/" element={<Auth />} />
 				</Route>
 				<Route element={<RequireAuth />}>
