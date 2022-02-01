@@ -126,11 +126,14 @@ export function deleteUser(id) {
 
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
-		let respuesta = await axios.post("http://localhost:3001/auth/signIn", {
-			email,
-			pwd,
-		});
-
+		let respuesta = (
+			await axios.post("http://localhost:3001/auth/signIn", {
+				email,
+				pwd,
+			})
+		).data;
+		console.log(respuesta);
+		localStorage.setItem("userAuth", JSON.stringify(respuesta));
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};
 }
