@@ -23,8 +23,10 @@ export const AuthProvider = ({ children }) => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
 			setUser(currentUser);
-			const token = await currentUser.getIdToken();
-			setToken(token);
+			if (token) {
+				const token = await currentUser.getIdToken();
+				setToken(token);
+			}
 			setLoading(false);
 		});
 		return () => {
