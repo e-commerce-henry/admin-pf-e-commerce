@@ -32,7 +32,7 @@ export default function Auth(){
             const response = await dispatch(authUser(user))
            
         if(response){
-            const token = localStorage.getItem('userAuth');
+            const token = sessionStorage.getItem('userAuth');
             setAuth({token: token});
             navigate(from, {replace: true});
         }
