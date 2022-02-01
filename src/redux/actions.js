@@ -133,6 +133,7 @@ export function authUser({ email, pwd }) {
 				pwd,
 			}
 		);
+		localStorage.setItem("userAuth", JSON.stringify(respuesta));
 
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};

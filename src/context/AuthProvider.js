@@ -1,14 +1,12 @@
 import { createContext, useState } from "react";
-import Cookies from "js-cookie";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
 	const [auth, setAuth] = useState({
-		token: Cookies.get("jwt-Logged"),
+		token: localStorage.getItem("userAuth"),
 	});
 
-	console.log(auth);
 	return (
 		<AuthContext.Provider value={{ auth, setAuth }}>
 			{children}

@@ -1,7 +1,6 @@
 import React from "react"
 import { Grid, Paper, TextField, Button} from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-import Cookies from 'js-cookie';
 import { useState } from "react";
 import { useDispatch} from "react-redux";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -31,10 +30,9 @@ export default function Auth(){
         e.preventDefault();
         try{
             const response = await dispatch(authUser(user))
-            console.log(response)
            
         if(response){
-            const token = Cookies.get('jwt-Logged');
+            const token = localStorage.getItem('userAuth');
             setAuth({token: token});
             navigate(from, {replace: true});
         }

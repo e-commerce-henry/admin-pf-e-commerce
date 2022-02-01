@@ -17,7 +17,7 @@ export default function Navbar(){
     const logOutHandler = ()=>{
         dispatch(logOut());
         setAuth({token: undefined})
-        Cookies.remove('jwt-Logged');
+        localStorage.removeItem('userAuth');
         navigate('/')
     }
 
