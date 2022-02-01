@@ -19,7 +19,6 @@ export default function SalesBanner(){
     }, [dispatch])
    
     const onChange = (e)=>{
-        console.log(e.target.value)
         setNewSaleItem({
            ...newSaleItem,
             [e.target.name] : e.target.value
@@ -33,6 +32,7 @@ export default function SalesBanner(){
             productId: newSaleItem.productId,
             discount: newSaleItem.discount,
         }
+        console.log(token)
         dispatch(postSaleBanner(saleItem, token));
         setNewSaleItem({
             discount: '',
@@ -47,7 +47,7 @@ export default function SalesBanner(){
         
         <div className={Style.container}>
             
-            <form id ="SalesForm" onSubmit={e => submitDiscountedItem(e)}>
+            <form id ="SalesForm" onSubmit={submitDiscountedItem}>
                 <h2>Set a discounted Product</h2>
 
                 <div>
