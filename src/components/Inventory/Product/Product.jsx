@@ -50,7 +50,8 @@ export default function Product({id, name, stock, price, img, brand, description
     const onSubmit = e =>{
         e.preventDefault();
         dispatch(editProduct(id, values, auth));
-        window.location = '/home/Inventory';
+        // window.location = '/home/Inventory';
+        setModal(!modal)
     }
 
     const handleOnChange = e => {
@@ -63,12 +64,6 @@ export default function Product({id, name, stock, price, img, brand, description
     const abriCerrarModal = () => {
         setModal(!modal)
     }
-
-/*     useEffect(() => {
-      
-        dispatch(getCategorys())
-    }, [dispatch]); */
-    
 
     return(
         <>

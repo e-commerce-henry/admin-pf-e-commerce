@@ -11,9 +11,14 @@ export function getProducts() {
 
 export function createProduct(newProduct, { token }) {
 	return async function (dispatch) {
-		return await axios.post("http://localhost:3001/products", newProduct, {
-			headers: { authorization: token },
-		});
+		const response = await axios.post(
+			"http://localhost:3001/products",
+			newProduct,
+			{
+				headers: { authorization: token },
+			}
+		);
+		return dispatch({ type: "CREATE_PRODUCT", payload: response.data });
 	};
 }
 

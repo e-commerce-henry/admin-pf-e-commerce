@@ -31,6 +31,18 @@ const reducer = (state = inicialState, action) => {
 					return b.id - a.id;
 				}),
 			};
+		case "CREATE_PRODUCT":
+			console.log(action.payload);
+			const newProductArr = [
+				...state.products,
+				action.payload.newProductWithCategory,
+			];
+			return {
+				...state,
+				products: newProductArr.sort((a, b) => {
+					return b.id - a.id;
+				}),
+			};
 		case "GET_SALEBANNER":
 			return {
 				...state,
@@ -55,9 +67,15 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "UPDATE_PRODUCT":
+			console.log(action.payload);
+			const updatedArray = state.products.filter((e) => {
+				return e.id != action.payload.id;
+			});
 			return {
 				...state,
-				updateproducts: action.payload,
+				products: [...updatedArray, action.payload].sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 
 		case "GET_ALLUSERS":
