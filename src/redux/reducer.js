@@ -18,10 +18,28 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				categorys: action.payload,
 			};
+		case "POST_CATEGORY":
+			console.log(action.payload);
+			return {
+				...state,
+				categorys: [...state.categorys, action.payload.newCategory],
+			};
 		case "GET_PRODUCTS":
 			return {
 				...state,
 				products: action.payload.sort((a, b) => {
+					return b.id - a.id;
+				}),
+			};
+		case "CREATE_PRODUCT":
+			console.log(action.payload);
+			const newProductArr = [
+				...state.products,
+				action.payload.newProductWithCategory,
+			];
+			return {
+				...state,
+				products: newProductArr.sort((a, b) => {
 					return b.id - a.id;
 				}),
 			};
@@ -49,9 +67,15 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "UPDATE_PRODUCT":
+			console.log(action.payload);
+			const updatedArray = state.products.filter((e) => {
+				return e.id != action.payload.id;
+			});
 			return {
 				...state,
-				updateproducts: action.payload,
+				products: [...updatedArray, action.payload].sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 
 		case "GET_ALLUSERS":
@@ -74,8 +98,6 @@ const reducer = (state = inicialState, action) => {
 				...state.users.filter((e) => e.id != action.payload.id),
 				action.payload,
 			];
-			console.log(action.payload);
-			console.log(state.users);
 			return {
 				...state,
 				users: result.sort((a, b) => {

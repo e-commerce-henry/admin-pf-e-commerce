@@ -3,9 +3,10 @@ import Style from './UsersPanel.module.css';
 import AllUsers from './AllUsers/AllUsers';
 import { useDispatch } from 'react-redux';
 import { addUser } from '../../redux/actions';
+import useAuth from '../../hooks/useAuth';
 
 export default function UsersPanel(){
-    console.log('entra')
+    const {auth} = useAuth();
     const dispatch = useDispatch();
     const [newUser, setNewUser] = useState({
         name: '',
@@ -29,7 +30,7 @@ export default function UsersPanel(){
     
     const submitCreateUser = (e) =>{
         e.preventDefault();
-        dispatch(addUser(newUser));
+        dispatch(addUser(newUser, auth));
         setNewUser({
             name: '',
             surname: '',

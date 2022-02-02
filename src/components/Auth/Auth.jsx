@@ -10,7 +10,7 @@ import {getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Auth(){
     const dispatch = useDispatch()
-    const {signIn } = useAuth();
+    const {auth, setAuth} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/home'
@@ -30,16 +30,15 @@ export default function Auth(){
     async function submitUser (e){
         e.preventDefault();
         try{
-            const userCredential = await signIn(user.email, user.pwd);
-            console.log(userCredential);
+            
             setErrorMsg('')
-            // const response = await dispatch(authUser(user))
+            const response = await dispatch(authUser(user))
+            console.log(response)
            
-        if(userCredential){
-            // const token = sessionStorage.getItem('userAuth');
-            // setAuth({token: token});
-            
-            
+        if(response){
+            const token = sessionStorage.getItem('userAuth');
+            console.log(token)
+            setAuth({token: token});
             navigate(from, {replace: true});
         }
         } catch(err){
