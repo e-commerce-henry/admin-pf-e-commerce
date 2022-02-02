@@ -162,7 +162,6 @@ export function authUser({ email, pwd }) {
 				pwd,
 			})
 		).data;
-		console.log(respuesta);
 		sessionStorage.setItem("userAuth", respuesta);
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};

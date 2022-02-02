@@ -87,7 +87,6 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "ADD_USER":
-			console.log(action.payload);
 			const { finalNewUser } = action.payload;
 			return {
 				...state,

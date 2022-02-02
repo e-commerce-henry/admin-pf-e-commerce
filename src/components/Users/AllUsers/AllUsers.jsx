@@ -50,7 +50,6 @@ const AllUsers = () =>{
     const onClick = (e)=>{
         setShowModal(!showModal)
         foundById = users.filter(elem=>{return elem.id == e.target.value})
-        console.log(foundById)
         const { id, name, surname, email, role  } = foundById[0];
         const { address, postalCode, city, province, floor} = foundById[0].clientAddresses[0];
         setUserToEdit({
