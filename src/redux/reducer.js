@@ -87,10 +87,11 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "ADD_USER":
-			const { newUser } = action.payload;
+			console.log(action.payload);
+			const { finalNewUser } = action.payload;
 			return {
 				...state,
-				users: [...state.users, newUser],
+				users: [...state.users, finalNewUser],
 			};
 
 		case "EDIT_USER":
