@@ -18,6 +18,12 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				categorys: action.payload,
 			};
+		case "POST_CATEGORY":
+			console.log(action.payload);
+			return {
+				...state,
+				categorys: [...state.categorys, action.payload.newCategory],
+			};
 		case "GET_PRODUCTS":
 			return {
 				...state,

@@ -7,7 +7,7 @@ import Style from './SalesBanner.module.css'
 
 export default function SalesBanner(){
     const dispatch = useDispatch();
-    const {token} = useAuth()
+    const {auth} = useAuth()
     const products = useSelector(state => state.products);
     const [newSaleItem, setNewSaleItem] = useState({
         productId: '',
@@ -32,8 +32,7 @@ export default function SalesBanner(){
             productId: newSaleItem.productId,
             discount: newSaleItem.discount,
         }
-        console.log(token)
-        dispatch(postSaleBanner(saleItem, token));
+        dispatch(postSaleBanner(saleItem, auth));
         setNewSaleItem({
             discount: '',
             productId: '',

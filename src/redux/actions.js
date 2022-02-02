@@ -10,7 +10,7 @@ export function getProducts() {
 }
 
 export function createProduct(newProduct, { token }) {
-	return async function () {
+	return async function (dispatch) {
 		return await axios.post("http://localhost:3001/products", newProduct, {
 			headers: { authorization: token },
 		});
@@ -24,10 +24,12 @@ export function getCategorys() {
 	};
 }
 
-export function editProduct(id, value) {
+export function editProduct(id, value, { token }) {
 	return (dispatch) => {
 		axios
-			.put(`http://localhost:3001/products/${id}`, value)
+			.put(`http://localhost:3001/products/${id}`, value, {
+				headers: { authorization: token },
+			})
 			.then((result) => {
 				return dispatch({
 					type: "UPDATE_PRODUCT",
@@ -40,9 +42,18 @@ export function editProduct(id, value) {
 	};
 }
 
-export function createCategory(newCategory) {
-	return async function () {
-		return await axios.post("http://localhost:3001/category", newCategory);
+export function createCategory(newCategory, { token }) {
+	return async function (dispatch) {
+		const response = await axios.post(
+			"http://localhost:3001/category",
+			newCategory,
+			{
+				headers: {
+					authorization: token,
+				},
+			}
+		);
+		return dispatch({ type: "POST_CATEGORY", payload: response.data });
 	};
 }
 
@@ -53,8 +64,7 @@ export function getSaleBanner() {
 	};
 }
 
-export function postSaleBanner(saleItem, token) {
-	console.log(token);
+export function postSaleBanner(saleItem, { token }) {
 	return async function (dispatch) {
 		const newSaleItem = await axios.post(
 			"http://localhost:3001/saleBanner",
@@ -69,9 +79,13 @@ export function postSaleBanner(saleItem, token) {
 	};
 }
 
-export function deleteSaleBanner(saleItemId) {
+export function deleteSaleBanner(saleItemId, { token }) {
 	return async function (dispatch) {
-		await axios.delete(`http://localhost:3001/saleBanner/${saleItemId}`);
+		await axios.delete(`http://localhost:3001/saleBanner/${saleItemId}`, {
+			headers: {
+				authorization: token,
+			},
+		});
 		return dispatch({ type: "DELETE_SALEBANNER", payload: saleItemId });
 	};
 }
@@ -149,9 +163,13 @@ export function authUser({ email, pwd }) {
 	};
 }
 
-export function getAllOrders() {
+export function getAllOrders({ token }) {
 	return async function (dispatch) {
-		const orders = (await axios.get("http://localhost:3001/orders")).data;
+		const orders = (
+			await axios.get("http://localhost:3001/orders", {
+				headers: { authorization: token },
+			})
+		).data;
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }

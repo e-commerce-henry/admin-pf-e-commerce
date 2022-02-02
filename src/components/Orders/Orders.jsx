@@ -4,16 +4,18 @@ import { getAllOrders } from "../../redux/actions";
 import OrderDetail from "./OrderDetail";
 import { getOrderByOrderId } from "../../redux/actions";
 import Style from './Orders.module.css'
+import useAuth from "../../hooks/useAuth";
 
 export default function Orders(){
     const dispatch = useDispatch();
+    const {auth} = useAuth();
     const orders = useSelector(state => state.orders)
     const orderById = useSelector(state => state.orderById);
     const [showDialog, setShowDialog]= useState(false)
 
 
     useEffect(()=>{
-        dispatch(getAllOrders());
+        dispatch(getAllOrders(auth));
     }, [dispatch])
     
   

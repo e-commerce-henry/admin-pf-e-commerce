@@ -14,7 +14,7 @@ export default function Inventory(){
     brand = [...new Set(brand)];
 
     useEffect(() =>{
-        dispatch(getProducts())
+        // dispatch(getProducts())
         dispatch(getCategorys())
     },[dispatch])
 
@@ -59,7 +59,7 @@ export default function Inventory(){
             category: ''
         })
         document.getElementById("myForm").reset();
-        window.location = '/Inventory'
+        window.location = '/home/Inventory'
 
     }
 

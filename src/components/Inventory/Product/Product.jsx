@@ -5,6 +5,7 @@ import { Modal, TextField, Select, MenuItem, TextareaAutosize } from '@material-
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct, getCategorys } from "../../../redux/actions";
+import useAuth from "../../../hooks/useAuth";
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -33,7 +34,7 @@ export default function Product({id, name, stock, price, img, brand, description
     const product = useSelector(state => state.products);
     let marca = product.map(e => e.brand);
     marca = [...new Set(marca)];
-
+    const {auth} = useAuth();
     const styles = useStyles();
     const dispatch = useDispatch()
     const [modal, setModal] = useState(false);
@@ -48,8 +49,8 @@ export default function Product({id, name, stock, price, img, brand, description
     })
     const onSubmit = e =>{
         e.preventDefault();
-        dispatch(editProduct(id, values));
-        window.location = '/Inventory';
+        dispatch(editProduct(id, values, auth));
+        window.location = '/home/Inventory';
     }
 
     const handleOnChange = e => {

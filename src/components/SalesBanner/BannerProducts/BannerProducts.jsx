@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useAuth from "../../../hooks/useAuth";
 import { deleteSaleBanner, getSaleBanner } from "../../../redux/actions";
 import Style from './BannerProducts.module.css'
 
 
 export default function BannerItems (){
     const dispatch = useDispatch();
+    const {auth} = useAuth();
     const saleBanner = useSelector(state => state.saleBanner);
     console.log(saleBanner)
 
@@ -15,7 +17,7 @@ export default function BannerItems (){
 
    const onClick = (e)=>{
        console.log(e.target.value)
-       dispatch(deleteSaleBanner(e.target.value))
+       dispatch(deleteSaleBanner(e.target.value, auth))
    }
     return(
         <>
