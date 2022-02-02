@@ -74,8 +74,6 @@ const reducer = (state = inicialState, action) => {
 				...state.users.filter((e) => e.id != action.payload.id),
 				action.payload,
 			];
-			console.log(action.payload);
-			console.log(state.users);
 			return {
 				...state,
 				users: result.sort((a, b) => {

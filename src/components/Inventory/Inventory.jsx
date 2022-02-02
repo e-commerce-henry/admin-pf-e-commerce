@@ -3,10 +3,11 @@ import { useEffect, useState } from "react";
 import { createProduct, getCategorys, getProducts } from "../../redux/actions";
 import Style from './Inventory.module.css'
 import Products from './Products/Products'
+import useAuth from "../../hooks/useAuth";
 
 export default function Inventory(){
     const dispatch = useDispatch()
-
+    const {auth} = useAuth();
     const categorys = useSelector(state => state.categorys)
     const product = useSelector(state => state.products);
     let brand = product.map(e => e.brand);
@@ -45,7 +46,7 @@ export default function Inventory(){
             description: newProduct.description,
             category: newProduct.category
         }
-        dispatch(createProduct(producto))
+        dispatch(createProduct(producto, auth))
         
         alert(`Category ${newProduct.name} create`)
         setProduct({

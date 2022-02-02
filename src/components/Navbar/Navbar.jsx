@@ -7,19 +7,17 @@ import useAuth from '../../hooks/useAuth';
 
 
 export default function Navbar(){
-    const {logOut} = useAuth();
+    const {setAuth} = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     function HandleClick(e){
         navigate(`/home/${e.target.value}`);
     };
 
-    const logOutHandler = async()=>{
-        try{
-            await logOut()
-        } catch(err){
-            console.log(err)
-        }
+    const logOutHandler = ()=>{
+        
+        setAuth({token:undefined})
+        sessionStorage.removeItem('userAuth')
         navigate('/')
     }
 

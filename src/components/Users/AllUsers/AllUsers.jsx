@@ -5,6 +5,7 @@ import Style from "./AllUsers.module.css"
 import { Modal, TextField} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import { useState } from "react";
+import useAuth from "../../../hooks/useAuth";
 
 //Material-ui styles
 const useStyles = makeStyles((theme)=>({
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme)=>({
 
 const AllUsers = () =>{
     const dispatch = useDispatch();
+    const {auth} = useAuth()
     const styles = useStyles();
     const users = useSelector(state => state.users);
     const [showModal, setShowModal]= useState(false)
@@ -39,7 +41,9 @@ const AllUsers = () =>{
     const [userToEdit, setUserToEdit] = useState({})
 
     useEffect(()=>{
-        dispatch(getUsers())
+        
+        dispatch(getUsers(auth))
+
     }, [dispatch])
 
     let foundById = null
@@ -72,12 +76,12 @@ const AllUsers = () =>{
 
     const editUserHandler = (e)=>{
         e.preventDefault();
-        dispatch(editUser(userToEdit))
+        dispatch(editUser(userToEdit, auth))
         setShowModal(!showModal)
     }
 
     const deleteUserHandler = (e) =>{
-        dispatch(deleteUser(e.target.value))
+        dispatch(deleteUser(e.target.value, auth))
     }
     return(
         <>

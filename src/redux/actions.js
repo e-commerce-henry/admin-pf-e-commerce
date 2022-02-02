@@ -9,9 +9,11 @@ export function getProducts() {
 	};
 }
 
-export function createProduct(newProduct) {
+export function createProduct(newProduct, { token }) {
 	return async function () {
-		return await axios.post("http://localhost:3001/products", newProduct);
+		return await axios.post("http://localhost:3001/products", newProduct, {
+			headers: { authorization: token },
+		});
 	};
 }
 
@@ -59,7 +61,7 @@ export function postSaleBanner(saleItem, token) {
 			saleItem,
 			{
 				headers: {
-					authorization: `Bearer ${token}`,
+					authorization: token,
 				},
 			}
 		);
@@ -74,30 +76,44 @@ export function deleteSaleBanner(saleItemId) {
 	};
 }
 
-export function getUsers() {
+export function getUsers({ token }) {
+	console.log(token);
 	return async function (dispatch) {
-		const users = (await axios.get("http://localhost:3001/users")).data;
-		return dispatch({ type: "GET_ALLUSERS", payload: users });
+		try {
+			const users = (
+				await axios.get("http://localhost:3001/users", {
+					headers: { authorization: token },
+				})
+			).data;
+			return dispatch({ type: "GET_ALLUSERS", payload: users });
+		} catch (err) {
+			return err;
+		}
 	};
 }
 
-export function editUser(userToEdit) {
+export function editUser(userToEdit, { token }) {
 	return async function (dispatch) {
 		const edited = (
 			await axios.put(
 				`http://localhost:3001/users/${userToEdit.id}`,
-				userToEdit
+				userToEdit,
+				{
+					headers: { authorization: token },
+				}
 			)
 		).data;
 		return dispatch({ type: "EDIT_USER", payload: userToEdit });
 	};
 }
 
-export function addUser(newUser) {
+export function addUser(newUser, { token }) {
 	return async function (dispatch) {
 		try {
 			const addedUser = (
-				await axios.post("http://localhost:3001/users", newUser)
+				await axios.post("http://localhost:3001/users", newUser, {
+					headers: { authorization: token },
+				})
 			).data;
 			return dispatch({ type: "ADD_USER", payload: addedUser });
 		} catch (err) {
@@ -106,10 +122,12 @@ export function addUser(newUser) {
 	};
 }
 
-export function deleteUser(id) {
+export function deleteUser(id, { token }) {
 	return async function (dispatch) {
 		try {
-			const user = await axios.delete(`http://localhost:3001/users/${id}`);
+			const user = await axios.delete(`http://localhost:3001/users/${id}`, {
+				headers: { authorization: token },
+			});
 			return dispatch({ type: "DELETE_USER", payload: id });
 		} catch (err) {
 			return err;
@@ -126,7 +144,7 @@ export function authUser({ email, pwd }) {
 			})
 		).data;
 		console.log(respuesta);
-		sessionStorage.setItem("userAuth", JSON.stringify(respuesta));
+		sessionStorage.setItem("userAuth", respuesta);
 		return dispatch({ type: "AUTH_USER", payload: respuesta });
 	};
 }
