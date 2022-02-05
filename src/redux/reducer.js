@@ -113,12 +113,15 @@ const reducer = (state = inicialState, action) => {
 		case "GET_ALL_ORDERS":
 			return {
 				...state,
-				orders: action.payload,
+				orders: action.payload.sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 		case "GET_ORDER_BY_ORDERID":
+			console.log(action.payload);
 			return {
 				...state,
-				orderById: state.orders.find((elem) => elem.id == action.payload),
+				orderById: action.payload,
 			};
 
 		case "LOG_OUT":

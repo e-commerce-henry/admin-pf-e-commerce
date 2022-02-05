@@ -1,0 +1,23 @@
+.modal {
+	display: flex;
+}
+
+.tableContainer {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 95%;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #000;
+}
+
+.bottomSection {
+	display: flex;
+	gap: 4rem;
+}
+
+.divider {
+	background: steelblue;
+}

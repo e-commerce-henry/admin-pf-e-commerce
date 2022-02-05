@@ -5,12 +5,13 @@ import OrderDetail from "./OrderDetail";
 import { getOrderByOrderId } from "../../redux/actions";
 import Style from './Orders.module.css'
 import useAuth from "../../hooks/useAuth";
+import Pagination from "../Pagination/Pagination";
+
 
 export default function Orders(){
     const dispatch = useDispatch();
     const {auth} = useAuth();
     const orders = useSelector(state => state.orders)
-    const orderById = useSelector(state => state.orderById);
     const [showDialog, setShowDialog]= useState(false)
 
 
@@ -21,8 +22,20 @@ export default function Orders(){
   
     const onClick = (e)=>{
         setShowDialog(!showDialog)
-        dispatch(getOrderByOrderId(e.target.value))
+        dispatch(getOrderByOrderId(e.target.value, auth))
     }
+
+    const numberPage =[];
+    const [page, setPage] = useState(1);
+    const ordersXpage =20;
+    let paginas = Math.ceil(orders.length/ordersXpage);
+        for (let i = 1; i <= paginas; i++) {
+            numberPage.push(i);
+        }
+        const indexUltimo = page*ordersXpage;
+        const indexInicio = indexUltimo - ordersXpage;
+        const sliceOrders = orders.slice(indexInicio, indexUltimo);
+
 
     return(
         <div className={Style.container}>
@@ -41,7 +54,7 @@ export default function Orders(){
                         </tr>
                         {
                             orders
-                                ? orders.map(e => {
+                                ? sliceOrders.map(e => {
                                 return ( 
                                     <tr className={Style.tableRow} key={e.id}>
                                         <td>{e.id}</td>
@@ -59,11 +72,19 @@ export default function Orders(){
                         }       
                     </tbody>
                 </table>
+                <Pagination
+                    numberPage={numberPage}
+                    page={page}
+                    setPage={setPage}
+                />         
                 
-                { showDialog
-                    ? <OrderDetail setShowDialog={setShowDialog} showDialog={showDialog}/>
-                    : null
-                }
+                <div className={Style.orderModal}>
+                    { showDialog
+                        ? <OrderDetail setShowDialog={setShowDialog} showDialog={showDialog}/>
+                        : null
+                    }
+                </div>
+                
             </div>
         </div>
         
