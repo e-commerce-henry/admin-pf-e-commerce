@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getAllOrders } from "../../redux/actions";
 import OrderDetail from "./OrderDetail";
+import EditOrder from "./OrderEditForm";
 import { getOrderByOrderId } from "../../redux/actions";
 import Style from './Orders.module.css'
 import useAuth from "../../hooks/useAuth";
@@ -12,16 +13,20 @@ export default function Orders(){
     const dispatch = useDispatch();
     const {auth} = useAuth();
     const orders = useSelector(state => state.orders)
-    const [showDialog, setShowDialog]= useState(false)
-
+    const [showDialogInfo, setShowDialogInfo]= useState(false)
+    const [showDialogEdit, setShowDialogEdit] = useState(false)
 
     useEffect(()=>{
         dispatch(getAllOrders(auth));
     }, [dispatch])
     
   
-    const onClick = (e)=>{
-        setShowDialog(!showDialog)
+    const onClickInfo = (e)=>{
+        setShowDialogInfo(!showDialogInfo)
+        dispatch(getOrderByOrderId(e.target.value, auth))
+    }
+    const onClickEdit = async(e)=>{
+        setShowDialogEdit(!showDialogEdit);
         dispatch(getOrderByOrderId(e.target.value, auth))
     }
 
@@ -64,7 +69,8 @@ export default function Orders(){
                                         <td>{e.shippingAddress}</td>
                                         <td>{e.shippingStatus}</td>
                                         <td>{e.total}</td>
-                                        <td><button value={e.id} onClick={onClick}>More Info</button></td>
+                                        <td><button value={e.id} onClick={onClickInfo}>More Info</button></td>
+                                        <td><button value={e.id} onClick={onClickEdit}>Edit</button></td>
                                     </tr>
                                 )
                                 })
@@ -78,9 +84,15 @@ export default function Orders(){
                     setPage={setPage}
                 />         
                 
-                <div className={Style.orderModal}>
-                    { showDialog
-                        ? <OrderDetail setShowDialog={setShowDialog} showDialog={showDialog}/>
+                <div >
+                    { showDialogInfo
+                        ? <OrderDetail setShowDialogInfo={setShowDialogInfo} showDialogInfo={showDialogInfo}/>
+                        : null
+                    }
+                </div>
+                <div >
+                    { showDialogEdit
+                        ? <EditOrder setShowDialogEdit={setShowDialogEdit} showDialogEdit={showDialogEdit} />
                         : null
                     }
                 </div>
