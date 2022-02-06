@@ -189,6 +189,21 @@ export function getOrderByOrderId(orderId, { token }) {
 	};
 }
 
+export function editOrder(orderToEdit, { token }) {
+	return async function (dispatch) {
+		const modifiedOrder = (
+			await axios.put(
+				`http://localhost:3001/orders/${orderToEdit.id}`,
+				orderToEdit,
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		return dispatch({ type: "EDIT_ORDER", payload: modifiedOrder });
+	};
+}
+
 export function logOut() {
 	return async function (dispatch) {
 		let response = (await axios.get("http://localhost:3001/auth/logOut")).data;

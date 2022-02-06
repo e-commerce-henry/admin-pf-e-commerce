@@ -123,6 +123,17 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				orderById: action.payload,
 			};
+		case "EDIT_ORDER":
+			console.log(action.payload);
+			const newOrders = state.orders.filter((e) => {
+				return e.id != action.payload.modifiedOrder.id;
+			});
+			return {
+				...state,
+				orders: [...newOrders, action.payload.modifiedOrder].sort((a, b) => {
+					return b.id - a.id;
+				}),
+			};
 
 		case "LOG_OUT":
 			return {

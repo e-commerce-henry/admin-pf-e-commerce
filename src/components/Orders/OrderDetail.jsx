@@ -5,20 +5,13 @@ import { useSelector } from "react-redux"
 import Style from './OrderDetail.module.css'
 
 
-const OrderDetail = ({showDialog, setShowDialog})=>{
+const OrderDetail = ({showDialogInfo, setShowDialogInfo})=>{
     const orderById = useSelector(state=> state.orderById);
     
-    // let userDetails;
-
-    // useEffect(async ()=>{ //traigo los detalles de usuario para mostrar los detalles de este en el modal debajo de la tabla
-    //     userDetails = (await axios.get(`http://localhost:3001/users/${orderById.userId}`)).data;
-    //     const shippingAddress = userDetails.clientAddresses.find((elem)=> elem.id == orderById.shippingAddress)
-    //     console.log(userDetails)
-    //     console.log(shippingAddress);
-    // }, [orderById])
+   
     return(
         
-        <Modal className={Style.modal} open={showDialog} onClose={()=>{setShowDialog(!showDialog)}} >
+        <Modal className={Style.modal} open={showDialogInfo} onClose={()=>{setShowDialogInfo(!showDialogInfo)}} >
             {/* Tabla detalles de ordenes */}
             <TableContainer className={Style.tableContainer} component = {Paper}>
                 <div>
