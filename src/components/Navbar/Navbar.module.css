@@ -1,17 +1,28 @@
-html, body{
-    background-color: #303841;   
+html,
+body {
+	background-color: #303841;
 }
-.container{
-    color: white;
-    text-align: center;
+.container {
+	color: white;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	margin: 0 30px;
 }
-
+.title {
+	border-bottom: solid 1px #fff;
+	margin-bottom: 1rem;
+}
 .container div {
-    display: flex;
-    justify-content: space-around;
+	display: flex;
+	justify-content: space-between;
+}
+.buttons button {
+	margin: 0 20px;
 }
 
-button{
-    width: 16%;
-    height: 50px;
+.container button {
+	width: 20%;
+	height: 50px;
+	font-size: 1rem;
 }

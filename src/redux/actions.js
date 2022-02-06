@@ -178,8 +178,15 @@ export function getAllOrders({ token }) {
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }
-export function getOrderByOrderId(orderId) {
-	return { type: "GET_ORDER_BY_ORDERID", payload: orderId };
+export function getOrderByOrderId(orderId, { token }) {
+	return async function (dispatch) {
+		const orderDetails = (
+			await axios.get(`http://localhost:3001/orders/order/${orderId}`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "GET_ORDER_BY_ORDERID", payload: orderDetails });
+	};
 }
 
 export function logOut() {
