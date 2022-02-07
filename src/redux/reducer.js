@@ -26,6 +26,12 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				categorys: [...state.categorys, action.payload.newCategory],
 			};
+		case "DELETE_CATEGORY":
+			console.log(action.payload);
+			return {
+				...state,
+				categorys: state.categorys.filter((e) => e.id != action.payload.id),
+			};
 		case "GET_PRODUCTS":
 			return {
 				...state,
