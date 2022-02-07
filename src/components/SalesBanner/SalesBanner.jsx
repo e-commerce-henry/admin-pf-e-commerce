@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
+import useAuth from "../../hooks/useAuth";
 import { getProducts, postSaleBanner } from "../../redux/actions";
 import BannerItems from "./BannerProducts/BannerProducts";
 import Style from './SalesBanner.module.css'
 
 export default function SalesBanner(){
     const dispatch = useDispatch();
+    const {auth} = useAuth()
     const products = useSelector(state => state.products);
     const [newSaleItem, setNewSaleItem] = useState({
         productId: '',
@@ -17,7 +19,6 @@ export default function SalesBanner(){
     }, [dispatch])
    
     const onChange = (e)=>{
-        console.log(e.target.value)
         setNewSaleItem({
            ...newSaleItem,
             [e.target.name] : e.target.value
@@ -31,7 +32,7 @@ export default function SalesBanner(){
             productId: newSaleItem.productId,
             discount: newSaleItem.discount,
         }
-        dispatch(postSaleBanner(saleItem));
+        dispatch(postSaleBanner(saleItem, auth));
         setNewSaleItem({
             discount: '',
             productId: '',
@@ -45,7 +46,7 @@ export default function SalesBanner(){
         
         <div className={Style.container}>
             
-            <form id ="SalesForm" onSubmit={e => submitDiscountedItem(e)}>
+            <form id ="SalesForm" onSubmit={submitDiscountedItem}>
                 <h2>Set a discounted Product</h2>
 
                 <div>

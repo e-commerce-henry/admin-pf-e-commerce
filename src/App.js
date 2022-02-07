@@ -16,18 +16,18 @@ function App() {
 	return (
 		<>
 			<Routes>
-				<Route path="/" element={<Auth />} />
-				{/* <Route path="/" element={<PublicRoute />}>
-					
-				</Route> */}
-				{/* <Route element={<RequireAuth />}> */}
-				<Route path="/home" element={<Navbar />}>
-					<Route path="Users" element={<UsersPanel />} />
-					<Route path="Inventory" element={<Inventory />} />
-					<Route path="Orders" element={<Orders />} />
-					<Route path="Category" element={<Categorys />} />
-					<Route path="Favorite" element={<Favorite />} />
-					<Route path="SalesBanner" element={<SalesBanner />} />
+				<Route element={<PublicRoute />}>
+					<Route path="/" element={<Auth />} />
+				</Route>
+				<Route element={<RequireAuth />}>
+					<Route path="/home" element={<Navbar />}>
+						<Route path="Users" element={<UsersPanel />} />
+						<Route path="Inventory" element={<Inventory />} />
+						<Route path="Orders" element={<Orders />} />
+						<Route path="Category" element={<Categorys />} />
+						<Route path="Favorite" element={<Favorite />} />
+						<Route path="SalesBanner" element={<SalesBanner />} />
+					</Route>
 				</Route>
 				{/* </Route> */}
 			</Routes>

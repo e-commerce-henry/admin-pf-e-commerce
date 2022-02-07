@@ -4,7 +4,12 @@ import Style from "./Product.module.css";
 import { Modal, TextField, Select, MenuItem, TextareaAutosize } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from "react-redux";
+<<<<<<< HEAD
 import { editProduct, getCategorys, getProducts } from "../../../redux/actions";
+=======
+import { editProduct, getCategorys } from "../../../redux/actions";
+import useAuth from "../../../hooks/useAuth";
+>>>>>>> main
 
 const useStyles = makeStyles((theme)=>({
     modal:{
@@ -33,7 +38,7 @@ export default function Product({id, name, stock, price, img, brand, description
     const product = useSelector(state => state.products);
     let marca = product.map(e => e.brand);
     marca = [...new Set(marca)];
-
+    const {auth} = useAuth();
     const styles = useStyles();
     const dispatch = useDispatch()
     const [modal, setModal] = useState(false);
@@ -48,9 +53,15 @@ export default function Product({id, name, stock, price, img, brand, description
     })
     async function onSubmit (e){
         e.preventDefault();
+<<<<<<< HEAD
         await dispatch(editProduct(id, values));
         await dispatch(getProducts())
 
+=======
+        dispatch(editProduct(id, values, auth));
+        // window.location = '/home/Inventory';
+        setModal(!modal)
+>>>>>>> main
     }
 
     const handleOnChange = e => {
@@ -63,12 +74,6 @@ export default function Product({id, name, stock, price, img, brand, description
     const abriCerrarModal = () => {
         setModal(!modal)
     }
-
-/*     useEffect(() => {
-      
-        dispatch(getCategorys())
-    }, [dispatch]); */
-    
 
     return(
         <>

@@ -15,21 +15,21 @@ export default function Navbar(){
     };
 
     const logOutHandler = ()=>{
-        dispatch(logOut());
-        setAuth({token: undefined})
-        Cookies.remove('jwt-Logged');
+        
+        setAuth({token:undefined})
+        sessionStorage.removeItem('userAuth')
         navigate('/')
     }
 
     return(
         <>
         <div className={Style.container}>
-            <div>
+            <div className={Style.title}>
                 <h1>ADMIN E- COMMERCE</h1>
                 <button onClick={logOutHandler}>Log Out</button>
             </div>
             
-            <div>
+            <div className={Style.buttons}>
                 <button type='button' value='Users' onClick={(e) =>HandleClick(e)}>Users</button>
                 <button type='button' value='Inventory' onClick={(e) =>HandleClick(e)}>Inventory</button>
                 <button type='button' value='Orders' onClick={(e) =>HandleClick(e)}>Orders</button>

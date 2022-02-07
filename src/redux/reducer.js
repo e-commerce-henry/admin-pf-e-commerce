@@ -18,10 +18,28 @@ const reducer = (state = inicialState, action) => {
 				...state,
 				categorys: action.payload,
 			};
+		case "POST_CATEGORY":
+			console.log(action.payload);
+			return {
+				...state,
+				categorys: [...state.categorys, action.payload.newCategory],
+			};
 		case "GET_PRODUCTS":
 			return {
 				...state,
 				products: action.payload.sort((a, b) => {
+					return b.id - a.id;
+				}),
+			};
+		case "CREATE_PRODUCT":
+			console.log(action.payload);
+			const newProductArr = [
+				...state.products,
+				action.payload.newProductWithCategory,
+			];
+			return {
+				...state,
+				products: newProductArr.sort((a, b) => {
 					return b.id - a.id;
 				}),
 			};
@@ -49,9 +67,15 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "UPDATE_PRODUCT":
+			console.log(action.payload);
+			const updatedArray = state.products.filter((e) => {
+				return e.id != action.payload.id;
+			});
 			return {
 				...state,
-				updateproducts: action.payload,
+				products: [...updatedArray, action.payload].sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 
 		case "GET_ALLUSERS":
@@ -63,10 +87,10 @@ const reducer = (state = inicialState, action) => {
 			};
 
 		case "ADD_USER":
-			const { newUser } = action.payload;
+			const { finalNewUser } = action.payload;
 			return {
 				...state,
-				users: [...state.users, newUser],
+				users: [...state.users, finalNewUser],
 			};
 
 		case "EDIT_USER":
@@ -74,8 +98,6 @@ const reducer = (state = inicialState, action) => {
 				...state.users.filter((e) => e.id != action.payload.id),
 				action.payload,
 			];
-			console.log(action.payload);
-			console.log(state.users);
 			return {
 				...state,
 				users: result.sort((a, b) => {
@@ -91,12 +113,26 @@ const reducer = (state = inicialState, action) => {
 		case "GET_ALL_ORDERS":
 			return {
 				...state,
-				orders: action.payload,
+				orders: action.payload.sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 		case "GET_ORDER_BY_ORDERID":
+			console.log(action.payload);
 			return {
 				...state,
-				orderById: state.orders.find((elem) => elem.id == action.payload),
+				orderById: action.payload,
+			};
+		case "EDIT_ORDER":
+			console.log(action.payload);
+			const newOrders = state.orders.filter((e) => {
+				return e.id != action.payload.modifiedOrder.id;
+			});
+			return {
+				...state,
+				orders: [...newOrders, action.payload.modifiedOrder].sort((a, b) => {
+					return b.id - a.id;
+				}),
 			};
 
 		case "LOG_OUT":

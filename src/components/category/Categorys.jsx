@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { createCategory } from "../../redux/actions";
 import { getCategorys } from "../../redux/actions";
 import Style from './Category.module.css';
+import useAuth from "../../hooks/useAuth";
 //import validate from '../validate'; 
 
 export default function Categorys(){
+    const {auth} = useAuth();
     const dispatch = useDispatch()
     const categorys = useSelector(state => state.categorys)
 
@@ -27,25 +29,24 @@ export default function Categorys(){
     function submitCategory(e){
         e.preventDefault();
 
-        dispatch(createCategory(newCategory))
+        dispatch(createCategory(newCategory, auth))
 
-        alert(`Category ${newCategory.name} create`)
         setCategory({
             name: ''
         })
 
-        document.getElementById("myForm").reset();
+        // document.getElementById("myForm").reset();
     
     }
 
     return(
         <div className={Style.container}>
             <h1>Category</h1>
-            <form id ="myForm" onSubmit={e => submitCategory(e)}>
+            <form id ="myForm" onSubmit={submitCategory}>
 
                 <div>
                     <label type="text">Category name </label>
-                    <input type='text' name='name' onChange={e => onChange(e)}/>
+                    <input type='text' name='name' onChange={onChange}/>
                 </div>
 
                 <div>
@@ -55,14 +56,16 @@ export default function Categorys(){
             </form>
             <div>
                 <h2>List Category</h2>
-                {
-                    categorys.map(category =>{
+                {   categorys 
+                    ?categorys.map(category =>{
                         const {id, name} = category
                         return(
                             <div key={id} >{name}</div> 
                         )
                          
                     })
+                    :null
+                    
                 }
             </div>
         </div>

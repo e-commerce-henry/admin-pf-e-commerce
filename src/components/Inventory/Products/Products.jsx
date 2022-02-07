@@ -6,23 +6,7 @@ import { getProducts } from "../../../redux/actions";
 import Style from "./Products.module.css"
 import Pagination from "../../Pagination/Pagination";
 
-function valProduct(e){
-    if(e.id){
-        return(
-            <Product 
-            key = {e.id}
-            id = {e.id}
-            name = {e.name}
-            stock = {e.stock}
-            price= {e.price}
-            img ={e.img}
-            brand={e.brand}
-            description={e.description}
-            categoryName={e.category.name} 
-            />
-        )
-    }
-}
+
 
 
 export default function Cards(){
@@ -57,13 +41,27 @@ export default function Cards(){
                         <th>Brand</th>
                         <th>Category</th>
                     </tr>
-                    <>
+                   
                     {
-                        slicevideogame.map(e => (
-                            valProduct(e)
-                        ))
+                        products    
+                            ? slicevideogame.map(e => {
+                                return(
+                                    <Product 
+                                    key = {e.id}
+                                    id = {e.id}
+                                    name = {e.name}
+                                    stock = {e.stock}
+                                    price= {e.price}
+                                    img ={e.img}
+                                    brand={e.brand}
+                                    description={e.description}
+                                    categoryName={e.category.name || e.category}
+                                    />
+                            )})
+                             : null  
+                            
                     }
-                    </>
+                    
                     
                 </tbody>
             </table>   

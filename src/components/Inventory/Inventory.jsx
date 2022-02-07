@@ -3,17 +3,18 @@ import { useEffect, useState } from "react";
 import { createProduct, getCategorys, getProducts } from "../../redux/actions";
 import Style from './Inventory.module.css'
 import Products from './Products/Products'
+import useAuth from "../../hooks/useAuth";
 
 export default function Inventory(){
     const dispatch = useDispatch()
-
+    const {auth} = useAuth();
     const categorys = useSelector(state => state.categorys)
     const product = useSelector(state => state.products);
     let brand = product.map(e => e.brand);
     brand = [...new Set(brand)];
 
     useEffect(() =>{
-        dispatch(getProducts())
+        // dispatch(getProducts())
         dispatch(getCategorys())
     },[dispatch])
 
@@ -45,9 +46,9 @@ export default function Inventory(){
             description: newProduct.description,
             category: newProduct.category
         }
-        dispatch(createProduct(producto))
+        dispatch(createProduct(producto, auth))
         
-        alert(`Category ${newProduct.name} create`)
+        // alert(`Category ${newProduct.name} create`)
         setProduct({
             name: '',
             stock: '',
@@ -58,7 +59,7 @@ export default function Inventory(){
             category: ''
         })
         document.getElementById("myForm").reset();
-        window.location = '/Inventory'
+        // window.location = '/home/Inventory'
 
     }
 
@@ -70,22 +71,22 @@ export default function Inventory(){
 
                 <div>
                     <label type="text">Product name </label>
-                    <input type='text' name='name' onChange={e => onChange(e)}/>
+                    <input type='text' name='name'  onChange={e => onChange(e)}/>
                 </div>
 
                 <div>
                     <label type="text">Stock </label>
-                    <input type='number' name='stock' onChange={e => onChange(e)}/>
+                    <input type='number' name='stock'  onChange={e => onChange(e)}/>
                 </div>
 
                 <div>
                     <label type="text">price </label>
-                    <input type='number' name='price' onChange={e => onChange(e)}/>
+                    <input type='number' name='price'  onChange={e => onChange(e)}/>
                 </div>
 
                 <div>
                     <label type="text">Image </label>
-                    <input type='text' placeholder='img url' name='img' onChange={e => onChange(e)}/>
+                    <input type='text' placeholder='img url'  name='img' onChange={e => onChange(e)}/>
                 </div>
 
                 <div>
@@ -105,7 +106,7 @@ export default function Inventory(){
 
                 <div>
                     <label type="text">Description </label>
-                    <input type='text' name='description' onChange={e => onChange(e)}/>
+                    <input type='text' name='description'  onChange={e => onChange(e)}/>
                 </div>
 
                 <div>
