@@ -7,7 +7,8 @@ import Inventory from "./components/Inventory/Inventory";
 import Orders from "./components/Orders/Orders";
 import Favorite from "./components/Favorite/Favorite";
 import SalesBanner from "./components/SalesBanner/SalesBanner";
-import Categorys from "./components/category/Categorys";
+import Category from "./components/category/Category";
+import ContactForm from "./components/ContactForm/ContactForm";
 import Auth from "./components/Auth/Auth";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import PublicRoute from "./components/RequireAuth/PublicRoutes";
@@ -24,9 +25,10 @@ function App() {
 						<Route path="Users" element={<UsersPanel />} />
 						<Route path="Inventory" element={<Inventory />} />
 						<Route path="Orders" element={<Orders />} />
-						<Route path="Category" element={<Categorys />} />
+						<Route path="Category" element={<Category />} />
 						<Route path="Favorite" element={<Favorite />} />
 						<Route path="SalesBanner" element={<SalesBanner />} />
+						<Route path="ContactForms" element={<ContactForm />} />
 					</Route>
 				</Route>
 			</Routes>

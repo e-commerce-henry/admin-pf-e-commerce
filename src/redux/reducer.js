@@ -9,6 +9,8 @@ const inicialState = {
 	users: [],
 	orders: [],
 	orderById: [],
+	contactForms: [],
+	formById: [],
 };
 
 const reducer = (state = inicialState, action) => {
@@ -23,6 +25,12 @@ const reducer = (state = inicialState, action) => {
 			return {
 				...state,
 				categorys: [...state.categorys, action.payload.newCategory],
+			};
+		case "DELETE_CATEGORY":
+			console.log(action.payload);
+			return {
+				...state,
+				categorys: state.categorys.filter((e) => e.id != action.payload.id),
 			};
 		case "GET_PRODUCTS":
 			return {
@@ -133,6 +141,27 @@ const reducer = (state = inicialState, action) => {
 				orders: [...newOrders, action.payload.modifiedOrder].sort((a, b) => {
 					return b.id - a.id;
 				}),
+			};
+		case "GET_CONTACT_FORMS":
+			return {
+				...state,
+				contactForms: action.payload.sort((a, b) => {
+					return b.id - a.id;
+				}),
+			};
+		case "GET_FORM_BYID":
+			return {
+				...state,
+				formById: state.contactForms.find((e) => e.id == action.payload),
+			};
+		case "DELETE_CONTACT_FORM":
+			return {
+				...state,
+				contactForms: state.contactForms
+					.filter((e) => e.id != action.payload)
+					.sort((a, b) => {
+						return b.id - a.id;
+					}),
 			};
 
 		case "LOG_OUT":

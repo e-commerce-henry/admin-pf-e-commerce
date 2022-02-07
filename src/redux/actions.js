@@ -62,6 +62,20 @@ export function createCategory(newCategory, { token }) {
 	};
 }
 
+export function deleteCategory(categoryId, { token }) {
+	return async function (dispatch) {
+		const response = await axios.delete(
+			`http://localhost:3001/category/${categoryId}`,
+			{
+				headers: {
+					authorization: token,
+				},
+			}
+		);
+		return dispatch({ type: "DELETE_CATEGORY", payload: response.data });
+	};
+}
+
 export function getSaleBanner() {
 	return async function (dispatch) {
 		const saleBanner = await axios.get("http://localhost:3001/saleBanner");
@@ -162,7 +176,6 @@ export function authUser({ email, pwd }) {
 				pwd,
 			})
 		).data;
-		console.log(respuesta);
 		sessionStorage.setItem("userAuth", respuesta.token);
 		return dispatch({ type: "AUTH_USER", payload: respuesta.token });
 	};
@@ -201,6 +214,37 @@ export function editOrder(orderToEdit, { token }) {
 			)
 		).data;
 		return dispatch({ type: "EDIT_ORDER", payload: modifiedOrder });
+	};
+}
+
+export function getContactForms({ token }) {
+	return async function (dispatch) {
+		const contactForms = (
+			await axios.get(`http://localhost:3001/contactForm`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "GET_CONTACT_FORMS", payload: contactForms });
+	};
+}
+
+export function getFormById(formId) {
+	return async function (dispatch) {
+		dispatch({
+			type: "GET_FORM_BYID",
+			payload: formId,
+		});
+	};
+}
+
+export function deleteContactForm(formId, { token }) {
+	return async function (dispatch) {
+		const deletedForm = (
+			await axios.delete(`http://localhost:3001/contactForm/${formId}`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "DELETE_CONTACT_FORM", payload: formId });
 	};
 }
 

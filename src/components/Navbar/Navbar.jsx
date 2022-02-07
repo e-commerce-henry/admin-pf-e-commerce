@@ -10,6 +10,7 @@ export default function Navbar(){
     const {setAuth} = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     function HandleClick(e){
         navigate(`/home/${e.target.value}`);
     };
@@ -35,6 +36,8 @@ export default function Navbar(){
                 <button type='button' value='Orders' onClick={(e) =>HandleClick(e)}>Orders</button>
                 <button type='button' value='Category' onClick={(e) =>HandleClick(e)}>Category</button>
                 <button type='button' value='SalesBanner' onClick={(e) =>HandleClick(e)}>Sales Banner</button>
+                <button type='button' value='ContactForms' onClick={(e) =>HandleClick(e)}>Contact Forms</button>
+
             </div>
         </div>
         <Outlet/>
