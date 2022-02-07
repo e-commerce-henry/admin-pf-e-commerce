@@ -204,6 +204,37 @@ export function editOrder(orderToEdit, { token }) {
 	};
 }
 
+export function getContactForms({ token }) {
+	return async function (dispatch) {
+		const contactForms = (
+			await axios.get(`http://localhost:3001/contactForm`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "GET_CONTACT_FORMS", payload: contactForms });
+	};
+}
+
+export function getFormById(formId) {
+	return async function (dispatch) {
+		dispatch({
+			type: "GET_FORM_BYID",
+			payload: formId,
+		});
+	};
+}
+
+export function deleteContactForm(formId, { token }) {
+	return async function (dispatch) {
+		const deletedForm = (
+			await axios.delete(`http://localhost:3001/contactForm/${formId}`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "DELETE_CONTACT_FORM", payload: formId });
+	};
+}
+
 export function logOut() {
 	return async function (dispatch) {
 		let response = (await axios.get("http://localhost:3001/auth/logOut")).data;

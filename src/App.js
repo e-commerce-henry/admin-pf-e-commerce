@@ -8,6 +8,7 @@ import Orders from "./components/Orders/Orders";
 import Favorite from "./components/Favorite/Favorite";
 import SalesBanner from "./components/SalesBanner/SalesBanner";
 import Categorys from "./components/category/Categorys";
+import ContactForm from "./components/ContactForm/ContactForm";
 import Auth from "./components/Auth/Auth";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
 import PublicRoute from "./components/RequireAuth/PublicRoutes";
@@ -27,6 +28,7 @@ function App() {
 						<Route path="Category" element={<Categorys />} />
 						<Route path="Favorite" element={<Favorite />} />
 						<Route path="SalesBanner" element={<SalesBanner />} />
+						<Route path="ContactForms" element={<ContactForm />} />
 					</Route>
 				</Route>
 			</Routes>
