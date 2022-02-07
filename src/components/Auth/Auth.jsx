@@ -43,7 +43,7 @@ export default function Auth(){
         }
         } catch(err){
             console.log(err)
-            setErrorMsg(err)
+            setErrorMsg('Email o Password invalidos')
         }
         setUser({
             email: '',
@@ -73,7 +73,7 @@ export default function Auth(){
 
                         {errorMsg
                             ?   <Alert severity="error">
-                                 {errorMsg.code} - <strong>Check it out!</strong>
+                                 {errorMsg} - <strong>Check it out!</strong>
                                 </Alert>
                             : null
                         }
