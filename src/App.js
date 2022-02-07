@@ -29,7 +29,6 @@ function App() {
 						<Route path="SalesBanner" element={<SalesBanner />} />
 					</Route>
 				</Route>
-				{/* </Route> */}
 			</Routes>
 		</>
 	);

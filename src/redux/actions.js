@@ -1,5 +1,7 @@
 const axios = require("axios");
 
+axios.defaults.withCredentials = true;
+
 export function getProducts() {
 	return async function (dispatch) {
 		const products = await axios("http://proyecto-personal.online/products");
