@@ -158,6 +158,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.name}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -166,6 +167,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.surname}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -174,6 +176,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.email}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -190,6 +193,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.address}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -198,6 +202,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.city}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -206,6 +211,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.province}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -214,6 +220,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.postalCode}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         <br/>
                         <TextField
@@ -222,6 +229,7 @@ const AllUsers = () =>{
                             className={styles.textfield}
                             value={userToEdit.floor}
                             onChange={onChangeHandler}
+                            disabled
                         />
                         
                         <div align='rigth' >
