@@ -43,7 +43,7 @@ export default function Auth(){
         }
         } catch(err){
             console.log(err)
-            setErrorMsg('Email o Password invalidos')
+            setErrorMsg('Email o Password invalidos o no tiene privlegios de administrador')
         }
         setUser({
             email: '',
