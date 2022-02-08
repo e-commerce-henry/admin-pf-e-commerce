@@ -171,7 +171,7 @@ export function deleteUser(id, { token }) {
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
 		let respuesta = (
-			await axios.post("http://localhost:3001/auth/signIn", {
+			await axios.post("http://localhost:3001/auth/signInAdmin", {
 				email,
 				pwd,
 			})
