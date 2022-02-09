@@ -51,6 +51,7 @@ export default function ContactForm(){
                             <th>Name</th>
                             <th>Subject</th>
                             <th>Date</th>
+                            <th>Status</th>
                         </tr>
                         {
                             contactForms
@@ -62,6 +63,7 @@ export default function ContactForm(){
                                         <td>{e.name}</td>
                                         <td>{e.subject}</td>
                                         <td>{e.date}</td>
+                                        <td>{e.status}</td>
                                         <td><button className={Style.msgbtn} value={e.id} onClick={onClickInfo}>See Message</button></td>
                                         <td><button className={Style.xbtn} value={e.id} onClick={onClickRemove}>X</button></td>
                                     </tr>

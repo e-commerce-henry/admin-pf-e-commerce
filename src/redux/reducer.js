@@ -163,6 +163,19 @@ const reducer = (state = inicialState, action) => {
 						return b.id - a.id;
 					}),
 			};
+		case "SEND_ANSWER_EMAIL":
+			console.log(action.payload);
+			const updatedContactForms = state.contactForms.filter(
+				(e) => e.id != action.payload.foundForm.id
+			);
+			return {
+				...state,
+				contactForms: [...updatedContactForms, action.payload.foundForm].sort(
+					(a, b) => {
+						return b.id - a.id;
+					}
+				),
+			};
 
 		case "LOG_OUT":
 			return {
