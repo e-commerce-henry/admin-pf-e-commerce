@@ -17,10 +17,10 @@ export default function Categories(){
         dispatch(getCategorys())
     },[dispatch])
 
-
-    const deleteCategoryHandler = (e)=>{
-        dispatch(deleteCategory(e.target.value, auth))
-    };
+    //se comenta funcion de borrar categoria
+    // const deleteCategoryHandler = (e)=>{
+    //     dispatch(deleteCategory(e.target.value, auth))
+    // };
 
     const numberPage =[];
     const [page, setPage] = useState(1);
@@ -50,7 +50,9 @@ export default function Categories(){
                                     <tr className={Style.subcontainer} key={e.id}>
                                     <td>{e.id}</td>
                                     <td>{e.name}</td>
+
                                     {/* <td><button className={Style.btnx} value={e.id} onClick={deleteCategoryHandler}>X</button></td> */}
+
                                 </tr>
                             )})
                              : null  
