@@ -1,14 +1,53 @@
-.container{
-    text-align: center;
+.container {
+  text-align: center;
 }
 
-.container td{
-    border:1px solid black;
+.container td {
+  border: 1px solid rgb(8, 8, 8);
+  border-radius: 5px;
 }
 
-.container button{
-    width: auto;
-    height: 25px;
-    margin-left: 15px;
-    margin-top: 5px;
+.edit {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+  color: #eeeeee;
+  margin-bottom: 1px;
+  margin-top: 1px;
+  height: 30px;
+  width: 40px;
+}
+
+.edit:hover {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: #ff5722;
+}
+
+.allbtnsp {
+  display: flex;
+  justify-content: center;
+}
+
+.btn1 {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 40px;
+  width: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.btn1:hover {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }

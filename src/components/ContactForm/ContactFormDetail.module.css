@@ -1,23 +1,29 @@
 .modal {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .Card {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 95% !important;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95% !important;
+  display: flex;
+  flex-direction: column;
 }
 .cardContent {
-	padding: 20px;
+  padding: 40px;
+  background-color: #eeeeee;
+  height: max-content;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+  color: #303841;
 }
 .cardContent h2 {
-	text-decoration: underline #000 2px;
-	margin-bottom: 30px;
+  margin-bottom: 30px;
 }

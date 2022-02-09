@@ -1,13 +1,61 @@
 .container {
-	margin-top: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .subcontainer {
-	text-align: center;
+  text-align: center;
+  color: #303841;
+  height: 32px;
 }
 
 .subcontainer td {
-	border: 1px solid black;
+  border: 1px solid rgb(8, 8, 8);
+  border-radius: 5px;
 }
-.subcontainer td button {
-	height: 5%;
+
+.moreinfo {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 30px;
+  width: 80px;
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+.moreinfo:hover {
+  border: none;
+  outline: none;
+  height: 30px;
+  cursor: pointer;
+}
+
+.allbtnsallusers {
+  display: flex;
+  justify-content: center;
+}
+
+.btnallusers {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 40px;
+  width: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.btnallusers:hover {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }

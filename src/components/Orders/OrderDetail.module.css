@@ -1,23 +1,32 @@
 .modal {
-	display: flex;
+  display: flex;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
 }
 
 .tableContainer {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 95% !important;
-	display: flex;
-	flex-direction: column;
-	border: 1px solid #000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 95% !important;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+
+  border-radius: 10px;
 }
 
 .bottomSection {
-	display: flex;
-	gap: 4rem;
+  display: flex;
+  gap: 4rem;
 }
 
 .divider {
-	background: steelblue !important;
+  background: #ff5722 !important;
+}
+
+.letra {
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
 }

@@ -101,7 +101,7 @@ export default function UsersPanel(){
                     </div>
                 </div>
                 <div>
-                    <button type='submit'>Create User</button>
+                    <button className={Style.createuser} type='submit'>Create User</button>
                 </div>
             </form>
             <div className={Style.allUsers}>

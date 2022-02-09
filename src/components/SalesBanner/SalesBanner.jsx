@@ -51,7 +51,7 @@ export default function SalesBanner(){
 
                 <div>
                     <label type="text">Product name </label>
-                    <select onChange={onChange} name="productId">
+                    <select className={Style.selp} onChange={onChange} name="productId">
                         <option hidden>Select product:</option>
                         {
                             products? products.map( e => {
@@ -70,7 +70,7 @@ export default function SalesBanner(){
                 </div>
 
                 <div>
-                    <button type='submit'>Agregar producto a SaleBanner </button>
+                    <button className={Style.agregarsalebanner} type='submit'>Agregar producto a SaleBanner </button>
                 </div>
 
 

@@ -1,0 +1,24 @@
+.btnsorder {
+  display: flex;
+  justify-content: center;
+}
+
+.btnorder {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 40px;
+  width: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.btnorder:hover {
+  outline: none;
+  border: none;
+  cursor: pointer;
+}

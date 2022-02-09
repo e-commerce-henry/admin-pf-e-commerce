@@ -43,7 +43,7 @@ export default function Auth(){
         }
         } catch(err){
             console.log(err)
-            setErrorMsg('Email o Password invalidos o no tiene privlegios de administrador')
+            setErrorMsg('Email o Password inválidos o no tiene privilegios de administrador')
         }
         setUser({
             email: '',
@@ -55,7 +55,7 @@ export default function Auth(){
         <>
         <div style={{padding: 60}}>
             <Paper elevation={3}>
-                <form id ="myForm" onSubmit={submitUser}>
+                <form id ="myForm" onSubmit={submitUser} >
                     <Grid
                         container
                         spacing={3}
@@ -78,7 +78,7 @@ export default function Auth(){
                             : null
                         }
                         <Grid item xs={12}>
-                            <Button fullWidth type='submit'>Login</Button>
+                            <Button fullWidth style={{ fontFamily: "Lexend Deca", fontWeight:'500', backgroundColor:"#303841", color:"#eeeeee"}} type='submit'>Login</Button>
                         </Grid>
                     </Grid>
                 </form>

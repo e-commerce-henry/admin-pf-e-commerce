@@ -80,7 +80,7 @@ export default function Inventory(){
                 </div>
 
                 <div>
-                    <label type="text">price </label>
+                    <label type="text">Price </label>
                     <input type='number' name='price'  onChange={e => onChange(e)}/>
                 </div>
 
@@ -90,8 +90,9 @@ export default function Inventory(){
                 </div>
 
                 <div>
-                    <select onChange={e => onChange(e)} name="brand">
-                        <option hidden>Select Brand:</option>
+                <label type="text">Brand </label>
+                    <select className={Style.selproduct} onChange={e => onChange(e)} name="brand">
+                        <option hidden>Select brand:</option>
                         {
                             brand? brand.map( (b,i) => {
                                 return (
@@ -110,8 +111,8 @@ export default function Inventory(){
                 </div>
 
                 <div>
-                    
-                    <select onChange={e => onChange(e)} name="category">
+                <label type="text">Category </label>
+                    <select className={Style.selproduct} onChange={e => onChange(e)} name="category">
                         <option hidden>Select category:</option>
                         {
                             categorys? categorys.map( cat => {
@@ -126,14 +127,14 @@ export default function Inventory(){
                 </div>
 
                 <div>
-                    <button type='submit'>Agregar producto </button>
+                    <button className={Style.agregarproducto} type='submit'>Agregar producto </button>
                 </div>
 
 
 
             </form>
             <div className={Style.inventory}>
-                <h1>INVENTORY</h1>
+                <h1>Inventory</h1>
                 <Products/>
             </div>
         </div>

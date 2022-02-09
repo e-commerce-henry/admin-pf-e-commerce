@@ -1,46 +1,61 @@
 .container {
-	display: flex;
-	gap: 4rem;
-	color: white;
-	margin: 3%;
-	justify-content: space-around;
+  display: flex;
+  gap: 4rem;
+  color: #eeeeee;
+  margin: 3%;
+  justify-content: space-around;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
 }
 
 .allOrders h1 {
-	text-align: center;
+  text-align: center;
 }
 
-button {
-	border-radius: 10px;
-	border: solid 1px black;
-	width: 80%;
-	align-self: center;
+.btnorders {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 30px;
+  width: 80px;
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-bottom: 1px;
+  margin-top: 1px;
 }
 
-button:hover {
-	background-color: #ff5722;
-	border: solid 1px black;
+.btnorders:hover {
+  border: none;
+  outline: none;
+  height: 30px;
+  cursor: pointer;
 }
 
 .table {
-	margin-top: 20px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .tableRow {
-	text-align: center;
+  text-align: center;
+  color: #303841;
+  height: 32px;
 }
 
 .tableRow td {
-	border: 1px solid black;
-}
-.tableRow td button {
-	height: 5%;
+  border: 1px solid rgb(8, 8, 8);
+  border-radius: 5px;
 }
 
 .allOrders {
-	background-color: aliceblue;
-	color: black;
-	width: 80%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+  background-color: #eeeeee;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-radius: 10px;
+  color: #303841;
 }

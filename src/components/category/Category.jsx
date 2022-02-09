@@ -44,12 +44,12 @@ export default function Categorys(){
                 <h2>Create a Category</h2>
 
                 <div>
-                    <label type="text">Category name </label>
+                    <label type="text">Category name</label>
                     <input type='text' name='name'  onChange={onChange}/>
                 </div>
 
                 <div>
-                    <button type='submit'>Create</button>
+                    <button className={Style.crearcategoria} type='submit'>Create</button>
                 </div>
 
             </form>
