@@ -47,6 +47,18 @@ const useStyles = makeStyles((theme)=>({
 
 
 
+const validate = (userToEdit)=>{
+    const errors = {}
+
+    if(!userToEdit.role){errors.role = 'Role is required'}
+    else if(!/^admin$|^user$/g.test(userToEdit.role)){
+            errors.role = 'Role is invalid - Only "admin" and "user" values are valid'
+        }    
+    return errors
+}
+
+
+
 
 const AllUsers = () =>{
     const dispatch = useDispatch();
@@ -56,6 +68,7 @@ const AllUsers = () =>{
     const [showModal, setShowModal]= useState(false)
     
     const [userToEdit, setUserToEdit] = useState({})
+    const [errors, setErrors] = useState('')
 
     useEffect(()=>{
         
@@ -89,6 +102,10 @@ const AllUsers = () =>{
             ...userToEdit,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...userToEdit,
+            [e.target.name]: e.target.value
+        }))
     }
 
     const editUserHandler = (e)=>{
@@ -231,6 +248,7 @@ const AllUsers = () =>{
                                 className: styles.floatingValueFocusStyle,
                             }}
                         />
+                        {!errors.role ? null : <span>{errors.role}</span>}
                         <br/>
                         <TextField
                             label='Address:'
