@@ -228,6 +228,23 @@ export function getContactForms({ token }) {
 	};
 }
 
+export function sendAnswerEmail({ answer, email, id, name, token }) {
+	console.log(id);
+	return async function (dispatch) {
+		const answeredMsg = (
+			await axios.post(
+				`http://localhost:3001/email/answer/${id}`,
+				{ answer, email, name },
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		console.log(answeredMsg);
+		return dispatch({ type: "SEND_ANSWER_EMAIL", payload: answeredMsg });
+	};
+}
+
 export function getFormById(formId) {
 	return async function (dispatch) {
 		dispatch({
