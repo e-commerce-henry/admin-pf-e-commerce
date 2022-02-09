@@ -110,8 +110,11 @@ const AllUsers = () =>{
 
     const editUserHandler = (e)=>{
         e.preventDefault();
-        dispatch(editUser(userToEdit, auth))
-        setShowModal(!showModal)
+        if(Object.keys(errors).length === 0){
+            dispatch(editUser(userToEdit, auth))
+            setShowModal(!showModal)
+        }
+        
     }
 
     const deleteUserHandler = (e) =>{
