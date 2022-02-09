@@ -1,53 +1,87 @@
 .container {
-	display: flex;
-	gap: 2rem;
-	color: white;
-	margin: 3%;
-	justify-content: space-around;
+  display: flex;
+  gap: 4rem;
+  color: #eeeeee;
+  margin: 3%;
+  justify-content: space-around;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
 }
 .container form {
-	display: flex;
-	flex-direction: column;
-	font-size: larger;
-	border: 1px solid #fff;
-	border-radius: 5px;
-	padding: 1rem;
-	width: 20%;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 20%;
+  height: max-content;
+}
+.container form h2 {
+  text-align: center;
 }
 .container form div {
-	margin-top: 25px;
-	display: flex;
-	flex-direction: column;
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
 }
 
 .container form div input {
-	display: flex;
-	justify-content: flex-end;
+  display: flex;
+  outline: none;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  border: none;
+  height: 22px;
+  border-radius: 5px;
+  padding-left: 5px;
+  margin-top: 5px;
+}
+
+.agregarproducto {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 80%;
+  align-self: center;
+  font-size: 1rem;
+  height: 2rem;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+}
+
+.agregarproducto:hover {
+  background-color: #ff5722;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 h1 {
-	text-align: center;
-	grid-area: 1 / 2 / 2 / 3;
+  text-align: center;
+  grid-area: 1 / 2 / 2 / 3;
 }
 
 .container div {
-	grid-area: 1 / 2 / 6 / 6;
-}
-
-button {
-	border-radius: 15px;
-}
-
-button:hover {
-	background-color: #ff5722;
-	font-weight: bold;
-	border: none;
+  grid-area: 1 / 2 / 6 / 6;
 }
 
 .inventory {
-	background-color: aliceblue;
-	color: black;
-	width: 70%;
-	display: flex;
-	flex-direction: column;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  color: #303841;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.selproduct {
+  display: flex;
+  outline: none;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  border: none;
+  height: 24px;
+  border-radius: 5px;
+  padding-left: 5px;
 }

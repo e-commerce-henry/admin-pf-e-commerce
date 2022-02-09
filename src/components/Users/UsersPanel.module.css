@@ -1,65 +1,92 @@
 .container {
-	display: flex;
-	gap: 4rem;
-	color: white;
-	margin: 3%;
-	justify-content: space-around;
+  display: flex;
+  gap: 4rem;
+  color: #eeeeee;
+  margin: 3%;
+  justify-content: space-around;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
 }
 .container form {
-	display: flex;
-	flex-direction: column;
-	font-size: larger;
-	border: 1px solid #fff;
-	border-radius: 5px;
-	padding: 1rem;
-	width: 20%;
+  display: flex;
+  flex-direction: column;
+  font-size: larger;
+  border: 1px solid #eeeeee;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 20%;
+  height: max-content;
 }
+
+.container form h2 {
+  text-align: center;
+}
+
 .container form div {
-	margin-top: 15px;
-	display: flex;
-	flex-direction: column;
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .container form div input {
-	display: flex;
+  display: flex;
+  outline: none;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  border: none;
+  height: 22px;
+  border-radius: 5px;
+  padding-left: 5px;
+  margin-top: 5px;
 }
 .container form .radioBtn {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-evenly;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 }
+
 .radioBtn label {
-	display: flex;
-	align-items: center;
-	justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+.radioBtn label:hover {
+  cursor: pointer;
+}
+
 h4 {
-	margin: 0;
-	font-weight: 500;
+  margin: 0;
+  font-weight: 500;
 }
 h1 {
-	text-align: center;
+  text-align: center;
 }
 
-button {
-	border-radius: 10px;
-	border: solid 1px black;
-	width: 80%;
-	align-self: center;
-	font-size: 1rem;
-	height: 2rem;
+.createuser {
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 80%;
+  align-self: center;
+  font-size: 1rem;
+  height: 2rem;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
 }
 
-button:hover {
-	background-color: #ff5722;
-	border: solid 1px black;
+.createuser:hover {
+  background-color: #ff5722;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .allUsers {
-	background-color: aliceblue;
-	color: black;
-	width: 70%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
+  background-color: #eeeeee;
+  border-radius: 10px;
+  color: #303841;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }

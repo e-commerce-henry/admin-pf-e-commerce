@@ -14,18 +14,36 @@ const useStyles = makeStyles((theme)=>({
         position:'absolute',
         display: 'flex',
         flexDirection: 'column',
-        width:700,
-        height:800,
+        justifyContent: 'center',
+        width:'40%',
+        height:'60%',
         backgroundColor:'white',
-        border:'2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2,4,3),
+        border:'none',
+        boxShadow: '0px 0px 5px 1px #303841',
+        padding: theme.spacing(0,4,0),
         top:'50%',
         left:'50%',
-        transform:'translate(-50%,-50%)'
+        transform:'translate(-50%,-50%)',
+        borderRadius: '20px',
+        color:'#FF5722',
+        fontSize:'15px',
+        fontFamily:'Lexend Deca',
     },
     textfield:{
-        width:'80%',
+        width:'100%',
+    },
+    floatingLabelFocusStyle: {
+        color: "#FF5722",
+        fontFamily:'Lexend Deca',
+        fontSize:'15px',
+        resize:'none'
+    },
+    floatingValueFocusStyle: {
+        color: "#303841",
+        fontFamily:'Lexend Deca',
+        fontSize:'15px',
+        resize:'none'
+
     }
 }))
 
@@ -111,6 +129,12 @@ const EditOrder = ({showDialogEdit, setShowDialogEdit}) =>{
                             name='id'
                             className={styles.textfield}
                             value={orderToEdit.id}
+                            InputLabelProps={{
+                                className: styles.floatingLabelFocusStyle,
+                            }}
+                            InputProps={{
+                                className: styles.floatingValueFocusStyle,
+                            }}
                             disabled
                         />
                         <br/>
@@ -121,6 +145,12 @@ const EditOrder = ({showDialogEdit, setShowDialogEdit}) =>{
                             value={orderToEdit.status}
                             required
                             onChange={onChangeHandler}
+                            InputLabelProps={{
+                                className: styles.floatingLabelFocusStyle,
+                            }}
+                            InputProps={{
+                                className: styles.floatingValueFocusStyle,
+                            }}
                         />
                         {!errors.status ? null : <span>{errors.status}</span>}
                         <br/>
@@ -131,6 +161,12 @@ const EditOrder = ({showDialogEdit, setShowDialogEdit}) =>{
                             value={orderToEdit.total}
                             required
                             onChange={onChangeHandler}
+                            InputLabelProps={{
+                                className: styles.floatingLabelFocusStyle,
+                            }}
+                            InputProps={{
+                                className: styles.floatingValueFocusStyle,
+                            }}
                         />
                         {!errors.total ? null : <span>{errors.total}</span>}
                         <br/>
@@ -141,13 +177,19 @@ const EditOrder = ({showDialogEdit, setShowDialogEdit}) =>{
                             value={orderToEdit.shippingStatus}
                             required
                             onChange={onChangeHandler}
+                            InputLabelProps={{
+                                className: styles.floatingLabelFocusStyle,
+                            }}
+                            InputProps={{
+                                className: styles.floatingValueFocusStyle,
+                            }}
                         />
                         <br/>
                         {!errors.shippingStatus ? null : <span>{errors.shippingStatus}</span>}
                         
-                        <div align='rigth' >
-                            <button type="submit" >Update</button>
-                            <button onClick={()=>setShowDialogEdit(!showDialogEdit)} >Cancel</button>
+                        <div className={Style.btnsorder} >
+                            <button className={Style.btnorder} type="submit" >Update</button>
+                            <button className={Style.btnorder} onClick={()=>setShowDialogEdit(!showDialogEdit)} >Cancel</button>
                         </div>
                     </form>
                 </Modal>

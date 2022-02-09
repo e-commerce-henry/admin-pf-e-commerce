@@ -55,7 +55,7 @@ export default function Orders(){
                             <th>Date</th>
                             <th>Shipping Address Id</th>
                             <th>Shipping Status</th>
-                            <th>Total $</th>
+                            <th>$ Total</th>
                         </tr>
                         {
                             orders
@@ -69,8 +69,8 @@ export default function Orders(){
                                         <td>{e.shippingAddress}</td>
                                         <td>{e.shippingStatus}</td>
                                         <td>{e.total}</td>
-                                        <td><button value={e.id} onClick={onClickInfo}>More Info</button></td>
-                                        <td><button value={e.id} onClick={onClickEdit}>Edit</button></td>
+                                        <td><button className={Style.btnorders} value={e.id} onClick={onClickInfo}>More Info</button></td>
+                                        <td><button className={Style.btnorders} value={e.id} onClick={onClickEdit}>Edit</button></td>
                                     </tr>
                                 )
                                 })

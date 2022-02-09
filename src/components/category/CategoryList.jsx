@@ -50,7 +50,7 @@ export default function Categories(){
                                     <tr className={Style.subcontainer} key={e.id}>
                                     <td>{e.id}</td>
                                     <td>{e.name}</td>
-                                    <td><button value={e.id} onClick={deleteCategoryHandler}>X</button></td>
+                                    {/* <td><button className={Style.btnx} value={e.id} onClick={deleteCategoryHandler}>X</button></td> */}
                                 </tr>
                             )})
                              : null  

@@ -37,7 +37,6 @@ export default function Navbar(){
                 <button type='button' value='Category' onClick={(e) =>HandleClick(e)}>Category</button>
                 <button type='button' value='SalesBanner' onClick={(e) =>HandleClick(e)}>Sales Banner</button>
                 <button type='button' value='ContactForms' onClick={(e) =>HandleClick(e)}>Contact Forms</button>
-
             </div>
         </div>
         <Outlet/>

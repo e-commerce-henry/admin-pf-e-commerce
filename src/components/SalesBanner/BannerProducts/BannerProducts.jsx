@@ -36,7 +36,7 @@ export default function BannerItems (){
                                     <td>{e.productId}</td>
                                     <td>{e.name}</td>
                                     <td>{e.discount}</td>
-                                    <td><button value={e.id} onClick={onClick}>X</button></td>
+                                    <td><button className={Style.btnxx} value={e.id} onClick={onClick}>X</button></td>
                                 </tr>
                             )
                             })

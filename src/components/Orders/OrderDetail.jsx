@@ -18,10 +18,10 @@ const OrderDetail = ({showDialogInfo, setShowDialogInfo})=>{
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Product Id</TableCell>
-                                <TableCell>Product name</TableCell>
-                                <TableCell>Quantity</TableCell>
-                                <TableCell>Price</TableCell>
+                                <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'700', textAlign:'center', color:'#FF5722' }}>Product Id</TableCell>
+                                <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'700', textAlign:'center', color:'#FF5722' }}>Product name</TableCell>
+                                <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'700', textAlign:'center', color:'#FF5722' }}>Quantity</TableCell>
+                                <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'700', textAlign:'center', color:'#FF5722' }}>Price</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -29,10 +29,10 @@ const OrderDetail = ({showDialogInfo, setShowDialogInfo})=>{
                             {   orderById.length>0 ?
                                 orderById[0].orderDetails.map(e=>{ return (
                                 <TableRow key={e.id}>
-                                    <TableCell >{e.productId}</TableCell>
-                                    <TableCell >{e.name}</TableCell>
-                                    <TableCell >{e.quantity}</TableCell>
-                                    <TableCell >{e.price}</TableCell>
+                                    <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500', textAlign:'center'}}>{e.productId}</TableCell>
+                                    <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500', textAlign:'center'}}>{e.name}</TableCell>
+                                    <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500', textAlign:'center'}}>{e.quantity}</TableCell>
+                                    <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500', textAlign:'center'}}>{e.price}</TableCell>
                                 </TableRow>
                                 ) 
                             })
@@ -55,20 +55,20 @@ const OrderDetail = ({showDialogInfo, setShowDialogInfo})=>{
                             <Table className={Style.userDetails}>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell variant="head">User Id</TableCell>
-                                        <TableCell>{orderById[0].user.id}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>User Id</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[0].user.id}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Name</TableCell>
-                                        <TableCell>{orderById[0].user.name}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Name</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[0].user.name}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Surname</TableCell>
-                                        <TableCell>{orderById[0].user.surname}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Surname</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[0].user.surname}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Email</TableCell>
-                                        <TableCell>{orderById[0].user.email}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Email</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[0].user.email}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -82,28 +82,28 @@ const OrderDetail = ({showDialogInfo, setShowDialogInfo})=>{
                             <Table className={Style.addressDetails}>
                                 <TableBody>
                                     <TableRow>
-                                        <TableCell variant="head">Address Id</TableCell>
-                                        <TableCell>{orderById[1].id}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Address Id</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].id}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Address</TableCell>
-                                        <TableCell>{orderById[1].address}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Address</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].address}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">PostalCode</TableCell>
-                                        <TableCell>{orderById[1].postalCode}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>PostalCode</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].postalCode}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">City</TableCell>
-                                        <TableCell>{orderById[1].city}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>City</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].city}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Province</TableCell>
-                                        <TableCell>{orderById[1].province}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Province</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].province}</TableCell>
                                     </TableRow>
                                     <TableRow>
-                                        <TableCell variant="head">Floor</TableCell>
-                                        <TableCell>{orderById[1].floor}</TableCell>
+                                        <TableCell variant="head" style={{ fontFamily: "Lexend Deca", fontWeight:'700', color:'#FF5722'}}>Floor</TableCell>
+                                        <TableCell style={{ fontFamily: "Lexend Deca", fontWeight:'500'}}>{orderById[1].floor}</TableCell>
                                     </TableRow>
                                 </TableBody>
                             </Table>

@@ -19,12 +19,12 @@ export default function Pagination({page, numberPage,setPage}){
     return(
         <div className='pagination_container' >
             <button
-                className="boton"
+                className="botonpaginado"
                 onClick={pagination}
                 value="inicio"
             >⏪</button>
             <button
-                className="boton"
+                className="botonpaginado"
                 onClick={pagination}
                 value="previous"
                 disabled={page===1}
@@ -43,13 +43,13 @@ export default function Pagination({page, numberPage,setPage}){
                     })
                 }
             <button
-                className="boton"
+                className="botonpaginado"
                 onClick={pagination}
                 value="next"
                 disabled={page===numberPage.length}
             >▶️</button>
             <button
-                className="boton"
+                className="botonpaginado"
                 onClick={pagination}
                 value="final" 
             >⏩</button>
