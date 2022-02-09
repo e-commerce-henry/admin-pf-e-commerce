@@ -1,10 +1,32 @@
 .modal {
+  /* width: 70%; */
+  /* height: 90%; */
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 70%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.msgg {
+  height: 250px;
+  width: 100%;
+  resize: none;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 400;
+  color: #303841;
+  outline: none;
+  border: none;
+  /* padding: 20px; */
+}
+
+.paper {
+  /* width: 1000px; */
+}
+
+.todocreo {
+  width: 70%;
+  /* height: 100%; */
 }
 
 .Card {
@@ -12,18 +34,45 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 95% !important;
+  /* width: 95% !important; */
   display: flex;
   flex-direction: column;
 }
 .cardContent {
   padding: 40px;
   background-color: #eeeeee;
-  height: max-content;
+  /* height: 90%; */
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
   color: #303841;
 }
 .cardContent h2 {
   margin-bottom: 30px;
+  text-align: center;
+}
+
+.allbtnp {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.btn1 {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 40px;
+  width: 120px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.btn1:hover {
+  outline: none;
+  border: none;
+  cursor: pointer;
 }

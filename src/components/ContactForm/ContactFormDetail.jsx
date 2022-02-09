@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme)=>({
     },
     textfield:{
         width:'100%',
+        backgroundColor:'#eeeeee',
     },
     floatingLabelFocusStyle: {
         color: "#FF5722",
@@ -88,16 +89,16 @@ const FormDetail = ({showDialogInfo, setShowDialogInfo})=>{
     return(
         
         <Modal className={Style.modal} open={showDialogInfo} onClose={()=>{setShowDialogInfo(!showDialogInfo)}} >
-            <div>
-                <Paper>
+            <div className={Style.todocreo}>
+                <Paper className={Style.paper}>
                     <Card variant="outlined" className={Style.card}>
                         <CardContent className={Style.cardContent}>
                             <h2>Received message</h2>
-                            <p>{formById.content}</p>
+                            <textarea className={Style.msgg} disabled>{formById.content}</textarea>
                         </CardContent>
                     </Card>
 
-                    <form onSubmit={onSubmitHandler}>
+                    <form  className={Style.form} onSubmit={onSubmitHandler}>
                         <TextField
                             id='filled-multiline-static'
                             label='Your answer'
@@ -109,7 +110,7 @@ const FormDetail = ({showDialogInfo, setShowDialogInfo})=>{
                                 className: styles.floatingLabelFocusStyle
                             }}
                             InputProps={{
-                                className: styles.f
+                                className: styles.floatingValueFocusStyle
                             }}
                             onChange={onChangeHandler}
                             value={answer}
@@ -117,9 +118,9 @@ const FormDetail = ({showDialogInfo, setShowDialogInfo})=>{
                         />
                         {!error.answer ? null : <span>{error.answer}</span>}
 
-                        <div  >
-                            <button  type="submit" >Send</button>
-                            <button  onClick={()=>setShowDialogInfo(!showDialogInfo)} >Cancel</button>
+                        <div className={Style.allbtnp} >
+                            <button className={Style.btn1} type="submit" >Send</button>
+                            <button className={Style.btn1} onClick={()=>setShowDialogInfo(!showDialogInfo)} >Cancel</button>
                         </div>
                     </form>
 
