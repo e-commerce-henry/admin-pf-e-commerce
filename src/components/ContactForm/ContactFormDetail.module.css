@@ -1,6 +1,4 @@
 .modal {
-  /* width: 70%; */
-  /* height: 90%; */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +7,7 @@
 }
 
 .msgg {
-  height: 250px;
+  height: 150px;
   width: 100%;
   resize: none;
   font-family: "Lexend Deca", sans-serif;
@@ -17,16 +15,10 @@
   color: #303841;
   outline: none;
   border: none;
-  /* padding: 20px; */
-}
-
-.paper {
-  /* width: 1000px; */
 }
 
 .todocreo {
   width: 70%;
-  /* height: 100%; */
 }
 
 .Card {
@@ -34,14 +26,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  /* width: 95% !important; */
   display: flex;
   flex-direction: column;
 }
 .cardContent {
   padding: 40px;
   background-color: #eeeeee;
-  /* height: 90%; */
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
   color: #303841;
