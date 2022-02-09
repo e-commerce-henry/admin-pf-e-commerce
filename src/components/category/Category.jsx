@@ -20,20 +20,39 @@ export default function Categorys(){
         name: ''
     })
 
+    const [errors, setErrors] = useState('');
+
+    const validate = (newCategory)=>{
+        const errors = {}
+
+        if(!newCategory.name){errors.name = 'Name is required'}
+        else if(!/^(?![\s.]+$)[a-zA-Z\s]*$/g.test(newCategory.name)){
+            errors.name = 'Name is invalid - Only letters are valid'
+        }
+        return errors
+    }
+
     function onChange(e){
         setCategory({
             ...newCategory,
             name: e.target.value
         })
+        setErrors(validate({
+            ...newCategory,
+            name: e.target.value
+        }))
     }
 
     function submitCategory(e){
         e.preventDefault();
-        dispatch(createCategory(newCategory, auth))
+        if(Object.keys(errors).length === 0){
+            dispatch(createCategory(newCategory, auth))
 
-        setCategory({
-            name: ''
-        })
+            setCategory({
+                name: ''
+            })
+        }
+        
     }
 
     return(
@@ -44,13 +63,18 @@ export default function Categorys(){
                 <h2>Create a Category</h2>
 
                 <div>
-                    <label type="text">Category name</label>
-                    <input type='text' name='name'  onChange={onChange}/>
+                    <label type="text" >Category name</label>
+                    <input type='text' name='name' required onChange={onChange}/>
+                    {!errors.name ? null : <span className={Style.error}>{errors.name}</span>}
                 </div>
 
                 <div>
                     <button className={Style.crearcategoria} type='submit'>Create</button>
                 </div>
+                { errors && Object.keys(errors).length > 0 
+                    ? <span className={Style.error}>No se puede enviar formulario vacio o con errores</span>
+                    : null
+                }
 
             </form>
             <div className={Style.categories}>
