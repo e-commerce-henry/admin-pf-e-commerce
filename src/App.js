@@ -7,7 +7,7 @@ import Inventory from "./components/Inventory/Inventory";
 import Orders from "./components/Orders/Orders";
 import Favorite from "./components/Favorite/Favorite";
 import SalesBanner from "./components/SalesBanner/SalesBanner";
-import Category from "./components/Category/Category";
+import Category from "./components/Category/category";
 import ContactForm from "./components/ContactForm/ContactForm";
 import Auth from "./components/Auth/Auth";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
