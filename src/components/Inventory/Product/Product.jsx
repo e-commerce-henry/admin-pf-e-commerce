@@ -5,22 +5,44 @@ import { Modal, TextField, Select, MenuItem, TextareaAutosize } from '@material-
 import { makeStyles } from '@material-ui/core/styles'
 import { useDispatch, useSelector } from "react-redux";
 import { editProduct, getCategorys, getProducts } from "../../../redux/actions";
+import useAuth from "../../../hooks/useAuth";
+import { validate } from "../Inventory";
 
 const useStyles = makeStyles((theme)=>({
     modal:{
         position:'absolute',
-        width:700,
-        height:800,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        width:'40%',
+        height:'95%',
         backgroundColor:'white',
-        border:'2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2,4,3),
+        border:'none',
+        boxShadow: '0px 0px 5px 1px #303841',
+        padding: theme.spacing(0,4,0),
         top:'50%',
         left:'50%',
-        transform:'translate(-50%,-50%)'
+        transform:'translate(-50%,-50%)',
+        borderRadius: '20px',
+        color:'#FF5722',
+        fontSize:'15px',
+        fontFamily:'Lexend Deca',
     },
     textfield:{
-        width:'80%',
+        width:'100%',
+    },
+    floatingLabelFocusStyle: {
+        color: "#FF5722",
+        fontFamily:'Lexend Deca',
+        fontSize:'15px',
+        resize:'none'
+    },
+    floatingValueFocusStyle: {
+        color: "#303841",
+        fontFamily:'Lexend Deca',
+        fontSize:'15px',
+        resize:'none'
+
     }
 }))
 
@@ -33,7 +55,7 @@ export default function Product({id, name, stock, price, img, brand, description
     const product = useSelector(state => state.products);
     let marca = product.map(e => e.brand);
     marca = [...new Set(marca)];
-
+    const {auth} = useAuth();
     const styles = useStyles();
     const dispatch = useDispatch()
     const [modal, setModal] = useState(false);
@@ -46,11 +68,15 @@ export default function Product({id, name, stock, price, img, brand, description
         description:description,
         category: categoryName
     })
-    async function onSubmit (e){
-        e.preventDefault();
-        await dispatch(editProduct(id, values));
-        await dispatch(getProducts())
 
+    const [errors, setErrors] = useState('');
+
+    const onSubmit = e =>{
+        e.preventDefault();
+        if(Object.keys(errors).length === 0){
+            dispatch(editProduct(id, values, auth));
+            setModal(!modal)
+        }
     }
 
     const handleOnChange = e => {
@@ -58,17 +84,15 @@ export default function Product({id, name, stock, price, img, brand, description
             ...values,
             [e.target.name]: e.target.value
         })
+        setErrors(validate({
+            ...values,
+            [e.target.name]: e.target.value
+        }))
     }
 
     const abriCerrarModal = () => {
         setModal(!modal)
     }
-
-/*     useEffect(() => {
-      
-        dispatch(getCategorys())
-    }, [dispatch]); */
-    
 
     return(
         <>
@@ -82,7 +106,7 @@ export default function Product({id, name, stock, price, img, brand, description
                 {/* <div>Description: {description}</div> */}
                 <td>{categoryName}</td>
                 <td>
-                    <button onClick={()=>abriCerrarModal()} >edit</button>
+                    <button className={Style.edit} onClick={()=>abriCerrarModal()} >Edit</button>
                 </td>
             </tr>
 
@@ -99,6 +123,12 @@ export default function Product({id, name, stock, price, img, brand, description
                         name='id'
                         className={styles.textfield}
                         value={id}
+                        InputLabelProps={{
+                            className: styles.floatingLabelFocusStyle,
+                        }}
+                        InputProps={{
+                            className: styles.floatingValueFocusStyle,
+                        }}
                         // onChange={handleOnChange}
                         disabled
                     />
@@ -109,7 +139,14 @@ export default function Product({id, name, stock, price, img, brand, description
                         className={styles.textfield}
                         value={values.name}
                         onChange={handleOnChange}
+                        InputLabelProps={{
+                            className: styles.floatingLabelFocusStyle,
+                        }}
+                        InputProps={{
+                            className: styles.floatingValueFocusStyle,
+                        }}
                     />
+                    {!errors.name ? null : <span>{errors.name}</span>}
                     <br/>
                     <TextField
                         label='Stock:'
@@ -117,15 +154,29 @@ export default function Product({id, name, stock, price, img, brand, description
                         className={styles.textfield}
                         value={values.stock}
                         onChange={handleOnChange}
+                        InputLabelProps={{
+                            className: styles.floatingLabelFocusStyle,
+                        }}
+                        InputProps={{
+                            className: styles.floatingValueFocusStyle,
+                        }}
                     />
+                    {!errors.stock ? null : <span>{errors.stock}</span>}
                     <br/>
                     <TextField
                         label='Price:'
                         name='price'
                         className={styles.textfield}
                         value={values.price}
-                        onChange={handleOnChange}img
+                        onChange={handleOnChange}
+                        InputLabelProps={{
+                            className: styles.floatingLabelFocusStyle,
+                        }}
+                        InputProps={{
+                            className: styles.floatingValueFocusStyle,
+                        }}
                     />
+                    {!errors.price ? null : <span>{errors.price}</span>}
                     <br/>
                     <TextField
                         label='URL Image:'
@@ -133,17 +184,26 @@ export default function Product({id, name, stock, price, img, brand, description
                         className={styles.textfield}
                         value={values.img}
                         onChange={handleOnChange}
+                        InputLabelProps={{
+                            className: styles.floatingLabelFocusStyle,
+                        }}
+                        InputProps={{
+                            className: styles.floatingValueFocusStyle,
+                        }}
                     />
+                    {!errors.img ? null : <span>{errors.img}</span>}
                     <br/>
                     <div>Description:</div>
                     <TextareaAutosize
                         label='Descripcion'
-                        maxRows={15}
+                        maxRows={5}
                         name='description'
                         className={styles.textfield}
                         value={values.description}
                         onChange={handleOnChange}
+                        style={{ resize: "none", fontFamily:'Lexend Deca', padding:'3px', outline:'none' }}
                     />
+                    {!errors.description ? null : <span>{errors.description}</span>}
                     <br/>
                     <div>Brand:</div>
                     <Select label='Brand' onChange={handleOnChange} name="brand" value={values.brand}>
@@ -155,6 +215,7 @@ export default function Product({id, name, stock, price, img, brand, description
                             }): null
                         }
                     </Select>
+                    {!errors.brand ? null : <span>{errors.brand}</span>}
                     <br/>
                     <div>Category:</div>
                     <Select label='Category' onChange={handleOnChange} name="category" value={values.category}>
@@ -166,12 +227,13 @@ export default function Product({id, name, stock, price, img, brand, description
                             }): null
                         }
                     </Select>
+                    {!errors.category ? null : <span>{errors.category}</span>}
                     <br/>
                     
                     <br/>
-                    <div align='rigth' >
-                        <button type="submit" >Actualizar</button>
-                        <button onClick={()=>abriCerrarModal()} >cancelar</button>
+                    <div className={Style.allbtnsp} >
+                        <button className={Style.btn1} type="submit" >Actualizar</button>
+                        <button className={Style.btn1} onClick={()=>abriCerrarModal()} >cancelar</button>
                     </div>
                 </form>
             </Modal>

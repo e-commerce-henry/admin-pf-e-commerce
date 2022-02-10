@@ -10,7 +10,7 @@ import {getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Auth(){
     const dispatch = useDispatch()
-    const {signIn } = useAuth();
+    const {auth, setAuth} = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/home'
@@ -30,22 +30,20 @@ export default function Auth(){
     async function submitUser (e){
         e.preventDefault();
         try{
-            const userCredential = await signIn(user.email, user.pwd);
-            console.log(userCredential);
+            
             setErrorMsg('')
-            // const response = await dispatch(authUser(user))
+            const response = await dispatch(authUser(user))
+            console.log(response)
            
-
-        if(userCredential){
-            // const token = sessionStorage.getItem('userAuth');
-            // setAuth({token: token});
-            
-            
+        if(response){
+            const token = sessionStorage.getItem('userAuth');
+            console.log(token)
+            setAuth({token: token});
             navigate(from, {replace: true});
         }
         } catch(err){
             console.log(err)
-            setErrorMsg(err)
+            setErrorMsg('Email o Password inválidos o no tiene privilegios de administrador')
         }
         setUser({
             email: '',
@@ -57,7 +55,7 @@ export default function Auth(){
         <>
         <div style={{padding: 60}}>
             <Paper elevation={3}>
-                <form id ="myForm" onSubmit={submitUser}>
+                <form id ="myForm" onSubmit={submitUser} >
                     <Grid
                         container
                         spacing={3}
@@ -75,12 +73,12 @@ export default function Auth(){
 
                         {errorMsg
                             ?   <Alert severity="error">
-                                 {errorMsg.code} - <strong>Check it out!</strong>
+                                 {errorMsg} - <strong>Check it out!</strong>
                                 </Alert>
                             : null
                         }
                         <Grid item xs={12}>
-                            <Button fullWidth type='submit'>Login</Button>
+                            <Button fullWidth style={{ fontFamily: "Lexend Deca", fontWeight:'500', backgroundColor:"#303841", color:"#eeeeee"}} type='submit'>Login</Button>
                         </Grid>
                     </Grid>
                 </form>

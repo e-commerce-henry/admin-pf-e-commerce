@@ -7,37 +7,36 @@ import useAuth from '../../hooks/useAuth';
 
 
 export default function Navbar(){
-    const {logOut} = useAuth();
+    const {setAuth} = useAuth();
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    
     function HandleClick(e){
         navigate(`/home/${e.target.value}`);
     };
 
-
-    const logOutHandler = async()=>{
-        try{
-            await logOut()
-        } catch(err){
-            console.log(err)
-        }
+    const logOutHandler = ()=>{
+        
+        setAuth({token:undefined})
+        sessionStorage.removeItem('userAuth')
         navigate('/')
     }
 
     return(
         <>
         <div className={Style.container}>
-            <div>
+            <div className={Style.title}>
                 <h1>ADMIN E- COMMERCE</h1>
                 <button onClick={logOutHandler}>Log Out</button>
             </div>
             
-            <div>
+            <div className={Style.buttons}>
                 <button type='button' value='Users' onClick={(e) =>HandleClick(e)}>Users</button>
                 <button type='button' value='Inventory' onClick={(e) =>HandleClick(e)}>Inventory</button>
                 <button type='button' value='Orders' onClick={(e) =>HandleClick(e)}>Orders</button>
                 <button type='button' value='Category' onClick={(e) =>HandleClick(e)}>Category</button>
                 <button type='button' value='SalesBanner' onClick={(e) =>HandleClick(e)}>Sales Banner</button>
+                <button type='button' value='ContactForms' onClick={(e) =>HandleClick(e)}>Contact Forms</button>
             </div>
         </div>
         <Outlet/>

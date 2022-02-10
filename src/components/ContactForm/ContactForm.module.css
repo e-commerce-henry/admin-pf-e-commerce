@@ -1,18 +1,23 @@
 .container {
   display: flex;
   gap: 4rem;
-  color: #eeeeee;
   margin: 3%;
   justify-content: space-around;
+  color: #eeeeee;
   font-family: "Lexend Deca", sans-serif;
   font-weight: 400;
 }
 
-.allOrders h1 {
+.allForms h1 {
   text-align: center;
 }
 
-.btnorders {
+button {
+  border-radius: 10px;
+  align-self: center;
+}
+
+.msgbtn {
   outline: none;
   border: none;
   background-color: #303841;
@@ -20,14 +25,36 @@
   font-weight: 500;
   color: #eeeeee;
   height: 30px;
-  width: 80px;
+  width: 100px;
   padding-right: 2px;
   padding-left: 2px;
   margin-bottom: 1px;
   margin-top: 1px;
 }
 
-.btnorders:hover {
+.msgbtn:hover {
+  border: none;
+  outline: none;
+  height: 30px;
+  cursor: pointer;
+}
+
+.xbtn {
+  outline: none;
+  border: none;
+  background-color: #303841;
+  font-family: "Lexend Deca", sans-serif;
+  font-weight: 500;
+  color: #eeeeee;
+  height: 30px;
+  width: 30px;
+  padding-right: 2px;
+  padding-left: 2px;
+  margin-bottom: 1px;
+  margin-top: 1px;
+}
+
+.xbtn:hover {
   border: none;
   outline: none;
   height: 30px;
@@ -50,12 +77,18 @@
   border-radius: 5px;
 }
 
-.allOrders {
+.allForms {
   background-color: #eeeeee;
+  border-radius: 10px;
+  color: #303841;
   width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border-radius: 10px;
-  color: #303841;
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

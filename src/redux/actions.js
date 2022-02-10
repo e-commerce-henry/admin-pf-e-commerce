@@ -9,12 +9,16 @@ export function getProducts() {
 	};
 }
 
-export function createProduct(newProduct) {
-	return async function () {
-		return await axios.post(
+export function createProduct(newProduct, { token }) {
+	return async function (dispatch) {
+		const response = await axios.post(
 			"http://proyecto-personal.online/products",
-			newProduct
+			newProduct,
+			{
+				headers: { authorization: token },
+			}
 		);
+		return dispatch({ type: "CREATE_PRODUCT", payload: response.data });
 	};
 }
 
@@ -25,10 +29,12 @@ export function getCategorys() {
 	};
 }
 
-export function editProduct(id, value) {
+export function editProduct(id, value, { token }) {
 	return (dispatch) => {
 		axios
-			.put(`http://proyecto-personal.online/products/${id}`, value)
+			.put(`http://proyecto-personal.online/products/${id}`, value, {
+				headers: { authorization: token },
+			})
 			.then((result) => {
 				return dispatch({
 					type: "UPDATE_PRODUCT",
@@ -41,12 +47,32 @@ export function editProduct(id, value) {
 	};
 }
 
-export function createCategory(newCategory) {
-	return async function () {
-		return await axios.post(
+export function createCategory(newCategory, { token }) {
+	return async function (dispatch) {
+		const response = await axios.post(
 			"http://proyecto-personal.online/category",
-			newCategory
+			newCategory,
+			{
+				headers: {
+					authorization: token,
+				},
+			}
 		);
+		return dispatch({ type: "POST_CATEGORY", payload: response.data });
+	};
+}
+
+export function deleteCategory(categoryId, { token }) {
+	return async function (dispatch) {
+		const response = await axios.delete(
+			`http://proyecto-personal.online/category/${categoryId}`,
+			{
+				headers: {
+					authorization: token,
+				},
+			}
+		);
+		return dispatch({ type: "DELETE_CATEGORY", payload: response.data });
 	};
 }
 
@@ -59,15 +85,14 @@ export function getSaleBanner() {
 	};
 }
 
-export function postSaleBanner(saleItem, token) {
-	console.log(token);
+export function postSaleBanner(saleItem, { token }) {
 	return async function (dispatch) {
 		const newSaleItem = await axios.post(
 			"http://proyecto-personal.online/saleBanner",
 			saleItem,
 			{
 				headers: {
-					authorization: `Bearer ${token}`,
+					authorization: token,
 				},
 			}
 		);
@@ -75,40 +100,58 @@ export function postSaleBanner(saleItem, token) {
 	};
 }
 
-export function deleteSaleBanner(saleItemId) {
+export function deleteSaleBanner(saleItemId, { token }) {
 	return async function (dispatch) {
 		await axios.delete(
-			`http://proyecto-personal.online/saleBanner/${saleItemId}`
+			`http://proyecto-personal.online/saleBanner/${saleItemId}`,
+			{
+				headers: {
+					authorization: token,
+				},
+			}
 		);
 		return dispatch({ type: "DELETE_SALEBANNER", payload: saleItemId });
 	};
 }
 
-export function getUsers() {
+export function getUsers({ token }) {
+	console.log(token);
 	return async function (dispatch) {
-		const users = (await axios.get("http://proyecto-personal.online/users"))
-			.data;
-		return dispatch({ type: "GET_ALLUSERS", payload: users });
+		try {
+			const users = (
+				await axios.get("http://proyecto-personal.online/users", {
+					headers: { authorization: token },
+				})
+			).data;
+			return dispatch({ type: "GET_ALLUSERS", payload: users });
+		} catch (err) {
+			return err;
+		}
 	};
 }
 
-export function editUser(userToEdit) {
+export function editUser(userToEdit, { token }) {
 	return async function (dispatch) {
 		const edited = (
 			await axios.put(
 				`http://proyecto-personal.online/users/${userToEdit.id}`,
-				userToEdit
+				userToEdit,
+				{
+					headers: { authorization: token },
+				}
 			)
 		).data;
 		return dispatch({ type: "EDIT_USER", payload: userToEdit });
 	};
 }
 
-export function addUser(newUser) {
+export function addUser(newUser, { token }) {
 	return async function (dispatch) {
 		try {
 			const addedUser = (
-				await axios.post("http://proyecto-personal.online/users", newUser)
+				await axios.post("http://proyecto-personal.online/users", newUser, {
+					headers: { authorization: token },
+				})
 			).data;
 			return dispatch({ type: "ADD_USER", payload: addedUser });
 		} catch (err) {
@@ -117,11 +160,14 @@ export function addUser(newUser) {
 	};
 }
 
-export function deleteUser(id) {
+export function deleteUser(id, { token }) {
 	return async function (dispatch) {
 		try {
 			const user = await axios.delete(
-				`http://proyecto-personal.online/users/${id}`
+				`http://proyecto-personal.online/users/${id}`,
+				{
+					headers: { authorization: token },
+				}
 			);
 			return dispatch({ type: "DELETE_USER", payload: id });
 		} catch (err) {
@@ -132,26 +178,105 @@ export function deleteUser(id) {
 
 export function authUser({ email, pwd }) {
 	return async function (dispatch) {
-		let respuesta = await axios.post(
-			"http://proyecto-personal.online/auth/signIn",
-			{
+		let respuesta = (
+			await axios.post("http://proyecto-personal.online/auth/signInAdmin", {
 				email,
 				pwd,
-			}
-		);
-		return dispatch({ type: "AUTH_USER", payload: respuesta });
+			})
+		).data;
+		sessionStorage.setItem("userAuth", respuesta.token);
+		return dispatch({ type: "AUTH_USER", payload: respuesta.token });
 	};
 }
 
-export function getAllOrders() {
+export function getAllOrders({ token }) {
 	return async function (dispatch) {
-		const orders = (await axios.get("http://proyecto-personal.online/orders"))
-			.data;
+		const orders = (
+			await axios.get("http://proyecto-personal.online/orders", {
+				headers: { authorization: token },
+			})
+		).data;
 		return dispatch({ type: "GET_ALL_ORDERS", payload: orders });
 	};
 }
-export function getOrderByOrderId(orderId) {
-	return { type: "GET_ORDER_BY_ORDERID", payload: orderId };
+export function getOrderByOrderId(orderId, { token }) {
+	return async function (dispatch) {
+		const orderDetails = (
+			await axios.get(
+				`http://proyecto-personal.online/orders/order/${orderId}`,
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		return dispatch({ type: "GET_ORDER_BY_ORDERID", payload: orderDetails });
+	};
+}
+
+export function editOrder(orderToEdit, { token }) {
+	return async function (dispatch) {
+		const modifiedOrder = (
+			await axios.put(
+				`http://proyecto-personal.online/orders/${orderToEdit.id}`,
+				orderToEdit,
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		return dispatch({ type: "EDIT_ORDER", payload: modifiedOrder });
+	};
+}
+
+export function getContactForms({ token }) {
+	return async function (dispatch) {
+		const contactForms = (
+			await axios.get(`http://proyecto-personal.online/contactForm`, {
+				headers: { authorization: token },
+			})
+		).data;
+		return dispatch({ type: "GET_CONTACT_FORMS", payload: contactForms });
+	};
+}
+
+export function sendAnswerEmail({ answer, email, id, name, token }) {
+	console.log(id);
+	return async function (dispatch) {
+		const answeredMsg = (
+			await axios.post(
+				`http://proyecto-personal.online/email/answer/${id}`,
+				{ answer, email, name },
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		console.log(answeredMsg);
+		return dispatch({ type: "SEND_ANSWER_EMAIL", payload: answeredMsg });
+	};
+}
+
+export function getFormById(formId) {
+	return async function (dispatch) {
+		dispatch({
+			type: "GET_FORM_BYID",
+			payload: formId,
+		});
+	};
+}
+
+export function deleteContactForm(formId, { token }) {
+	return async function (dispatch) {
+		const deletedForm = (
+			await axios.delete(
+				`http://proyecto-personal.online/contactForm/${formId}`,
+				{
+					headers: { authorization: token },
+				}
+			)
+		).data;
+		return dispatch({ type: "DELETE_CONTACT_FORM", payload: formId });
+	};
 }
 
 export function logOut() {

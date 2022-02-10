@@ -2,25 +2,45 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { getAllOrders } from "../../redux/actions";
 import OrderDetail from "./OrderDetail";
+import EditOrder from "./OrderEditForm";
 import { getOrderByOrderId } from "../../redux/actions";
 import Style from './Orders.module.css'
+import useAuth from "../../hooks/useAuth";
+import Pagination from "../Pagination/Pagination";
+
 
 export default function Orders(){
     const dispatch = useDispatch();
+    const {auth} = useAuth();
     const orders = useSelector(state => state.orders)
-    const orderById = useSelector(state => state.orderById);
-    const [showDialog, setShowDialog]= useState(false)
-
+    const [showDialogInfo, setShowDialogInfo]= useState(false)
+    const [showDialogEdit, setShowDialogEdit] = useState(false)
 
     useEffect(()=>{
-        dispatch(getAllOrders());
+        dispatch(getAllOrders(auth));
     }, [dispatch])
     
   
-    const onClick = (e)=>{
-        setShowDialog(!showDialog)
-        dispatch(getOrderByOrderId(e.target.value))
+    const onClickInfo = (e)=>{
+        setShowDialogInfo(!showDialogInfo)
+        dispatch(getOrderByOrderId(e.target.value, auth))
     }
+    const onClickEdit = async(e)=>{
+        setShowDialogEdit(!showDialogEdit);
+        dispatch(getOrderByOrderId(e.target.value, auth))
+    }
+
+    const numberPage =[];
+    const [page, setPage] = useState(1);
+    const ordersXpage =20;
+    let paginas = Math.ceil(orders.length/ordersXpage);
+        for (let i = 1; i <= paginas; i++) {
+            numberPage.push(i);
+        }
+        const indexUltimo = page*ordersXpage;
+        const indexInicio = indexUltimo - ordersXpage;
+        const sliceOrders = orders.slice(indexInicio, indexUltimo);
+
 
     return(
         <div className={Style.container}>
@@ -35,11 +55,11 @@ export default function Orders(){
                             <th>Date</th>
                             <th>Shipping Address Id</th>
                             <th>Shipping Status</th>
-                            <th>Total $</th>
+                            <th>$ Total</th>
                         </tr>
                         {
                             orders
-                                ? orders.map(e => {
+                                ? sliceOrders.map(e => {
                                 return ( 
                                     <tr className={Style.tableRow} key={e.id}>
                                         <td>{e.id}</td>
@@ -49,7 +69,8 @@ export default function Orders(){
                                         <td>{e.shippingAddress}</td>
                                         <td>{e.shippingStatus}</td>
                                         <td>{e.total}</td>
-                                        <td><button value={e.id} onClick={onClick}>More Info</button></td>
+                                        <td><button className={Style.btnorders} value={e.id} onClick={onClickInfo}>More Info</button></td>
+                                        <td><button className={Style.btnorders} value={e.id} onClick={onClickEdit}>Edit</button></td>
                                     </tr>
                                 )
                                 })
@@ -57,11 +78,25 @@ export default function Orders(){
                         }       
                     </tbody>
                 </table>
+                <Pagination
+                    numberPage={numberPage}
+                    page={page}
+                    setPage={setPage}
+                />         
                 
-                { showDialog
-                    ? <OrderDetail setShowDialog={setShowDialog} showDialog={showDialog}/>
-                    : null
-                }
+                <div >
+                    { showDialogInfo
+                        ? <OrderDetail setShowDialogInfo={setShowDialogInfo} showDialogInfo={showDialogInfo}/>
+                        : null
+                    }
+                </div>
+                <div >
+                    { showDialogEdit
+                        ? <EditOrder setShowDialogEdit={setShowDialogEdit} showDialogEdit={showDialogEdit} />
+                        : null
+                    }
+                </div>
+                
             </div>
         </div>
         
