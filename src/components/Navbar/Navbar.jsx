@@ -26,7 +26,7 @@ export default function Navbar(){
         <>
         <div className={Style.container}>
             <div className={Style.title}>
-                <h1>ADMIN E- COMMERCE</h1>
+                <h1>ADMIN ATR COMPUTACION</h1>
                 <button onClick={logOutHandler}>Log Out</button>
             </div>
             
